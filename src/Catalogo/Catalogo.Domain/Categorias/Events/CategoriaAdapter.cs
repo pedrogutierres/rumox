@@ -2,7 +2,7 @@
 
 namespace Catalogo.Domain.Categorias.Events
 {
-    public static class CategoriaAdapter
+    internal static class CategoriaAdapter
     {
         public static CategoriaRegistradaEvent ToCategoriaRegistradaEvent(Categoria categoria)
         {
