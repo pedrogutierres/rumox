@@ -8,7 +8,7 @@ namespace Catalogo.Events.Categorias
         public Guid Id { get; protected set; }
         public string Nome { get; protected set; }
 
-        public CategoriaEvent(Guid id, string nome)
+        protected CategoriaEvent(Guid id, string nome)
         {
             AggregateId = id;
             Id = id;

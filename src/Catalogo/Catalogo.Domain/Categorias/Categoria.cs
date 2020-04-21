@@ -15,6 +15,11 @@ namespace Catalogo.Domain.Categorias
             Nome = nome;
         }
 
+        public void AlteraNome(string nome)
+        {
+            Nome = nome;
+        }
+
         public override bool EhValido()
         {
             ValidationResult = new CategoriaEstaConsistenteValidation(this).Validate(this);
