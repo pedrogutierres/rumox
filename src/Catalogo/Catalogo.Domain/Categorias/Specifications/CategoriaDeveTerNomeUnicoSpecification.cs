@@ -18,7 +18,7 @@ namespace Catalogo.Domain.Categorias.Specifications
 
         public override bool EhValido()
         {
-            return !_categoriaRepository.Buscar(p => p.Id != Entidade.Id && p.Nome == Entidade.Nome).Result.Any();
+            return !_categoriaRepository.Buscar(p => p.Id != Entidade.Id && p.Nome == Entidade.Nome).Any();
         }
     }
 }

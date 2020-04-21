@@ -16,7 +16,8 @@ namespace Catalogo.Domain.Categorias.Validations
         private void ValidarNome()
         {
             RuleFor(p => p.Nome)
-                .NotEmpty().WithMessage("O nome deve ser informado.");
+                .NotEmpty().WithMessage("O nome da categoria deve ser informado.")
+                .MaximumLength(100).WithMessage("O nome da categoria deve conter no máximo {MaxLength} caracteres");
         }
     }
 }

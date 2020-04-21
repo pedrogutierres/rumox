@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Catalogo.Domain\Catalogo.Domain.csproj" />
+    <ProjectReference Include="..\Catalogo.Infra.Data.MySQL\Catalogo.Infra.Data.MySQL.csproj" />
+  </ItemGroup>
+
+</Project>

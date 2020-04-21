@@ -15,7 +15,7 @@ namespace Catalogo.Domain.Produtos.Specifications
 
         public override bool EhValido()
         {
-            return !_produtoRepository.Buscar(p => p.Id != Entidade.Id && p.Codigo == Entidade.Codigo).Result.Any();
+            return !_produtoRepository.Buscar(p => p.Id != Entidade.Id && p.Codigo == Entidade.Codigo).Any();
         }
     }
 }

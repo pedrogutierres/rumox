@@ -1,4 +1,5 @@
-﻿using Catalogo.Domain.Produtos.Events;
+﻿using Catalogo.Domain.Interfaces;
+using Catalogo.Domain.Produtos.Events;
 using Catalogo.Domain.Produtos.Interface;
 using Catalogo.Domain.Produtos.Validations;
 using Core.Domain.Interfaces;
@@ -16,7 +17,7 @@ namespace Catalogo.Domain.Produtos.Services
 
         public ProdutoService(
             IProdutoRepository produtoRepository,
-            IUnitOfWork uow, 
+            IUnitOfWorkCatalogo uow, 
             IMediatorHandler mediator, 
             INotificationHandler<DomainNotification> notifications) 
             : base(uow, mediator, notifications)

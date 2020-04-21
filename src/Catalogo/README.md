@@ -1,6 +1,7 @@
 
 ## Frameworks
 - Entity Framework Core
+- Pomelo MySQL
 
 ## Banco de dados
 - MySQL

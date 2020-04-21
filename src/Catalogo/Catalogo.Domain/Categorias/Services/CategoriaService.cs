@@ -1,6 +1,7 @@
 ﻿using Catalogo.Domain.Categorias.Events;
 using Catalogo.Domain.Categorias.Interfaces;
 using Catalogo.Domain.Categorias.Validations;
+using Catalogo.Domain.Interfaces;
 using Catalogo.Domain.Produtos.Interface;
 using Core.Domain.Interfaces;
 using Core.Domain.Notifications;
@@ -19,7 +20,7 @@ namespace Catalogo.Domain.Categorias.Services
         public CategoriaService(
             ICategoriaRepository categoriaRepository,
             IProdutoRepository produtoRepository,
-            IUnitOfWork uow,
+            IUnitOfWorkCatalogo uow,
             IMediatorHandler mediator,
             INotificationHandler<DomainNotification> notifications)
             : base(uow, mediator, notifications)
