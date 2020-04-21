@@ -11,6 +11,8 @@ namespace Catalogo.Domain.Produtos
         public string Descricao { get; private set; }
         public string InformacoesAdicionais { get; private set; }
         public bool Ativo { get; private set; } = true;
+        public DateTime DataHoraCriacao { get; private set; } = DateTime.Now;
+        public DateTime? DataHoraAlteracao { get; private set; }
 
         private Produto() { }
         public Produto(Guid id, Guid categoriaId, long codigo, string descricao, string informacoesAdicionais)
@@ -33,6 +35,14 @@ namespace Catalogo.Domain.Produtos
             InformacoesAdicionais = informacoesAdicionais;
         }
 
+        public bool GerarCodigo()
+        {
+            if (Codigo > 0) return false;
+
+            Codigo = new Random().Next(1, 999999999);
+            return true;
+        }
+
         public void Ativar()
         {
             Ativo = true;
@@ -47,11 +57,6 @@ namespace Catalogo.Domain.Produtos
             ValidationResult = new ProdutoEstaConsistenteValidation(this).Validate(this);
 
             return ValidationResult.IsValid;
-        }
-
-        public static long GerarCodigoAleatorio()
-        {
-            return new Random().Next(1, 999999999);
         }
     }
 }

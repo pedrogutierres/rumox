@@ -13,12 +13,9 @@
   </ItemGroup>
   
   <ItemGroup>
+    <ProjectReference Include="..\Catalogo\Catalogo.Infra.CrossCutting.DI\Catalogo.Infra.CrossCutting.DI.csproj" />
     <ProjectReference Include="..\Core\Core.Domain\Core.Domain.csproj" />
     <ProjectReference Include="..\Core\Core.Infra.CrossCutting.Identity\Core.Infra.CrossCutting.Identity.csproj" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>

@@ -13,9 +13,6 @@ namespace Core.Domain.Models
 
         public Guid Id { get; protected set; }
 
-        public DateTime DataHoraCriacao { get; protected set; } = DateTime.Now;
-        public DateTime? DataHoraAlteracao { get; protected set; }
-
         public abstract bool EhValido();
         public ValidationResult ValidationResult { get; protected set; }
 

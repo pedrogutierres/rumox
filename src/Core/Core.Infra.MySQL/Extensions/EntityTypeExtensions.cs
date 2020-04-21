@@ -10,12 +10,5 @@ namespace Core.Infra.MySQL.Extensions
         {
             modelBuilder.Ignore(p => p.ValidationResult);
         }
-
-        public static void IgnoreDataHoraCriacaoEAlteracao<TEntity>(this EntityTypeBuilder<TEntity> modelBuilder)
-            where TEntity : Entity<TEntity>
-        {
-            modelBuilder.Ignore(p => p.DataHoraCriacao);
-            modelBuilder.Ignore(p => p.DataHoraAlteracao);
-        }
     }
 }

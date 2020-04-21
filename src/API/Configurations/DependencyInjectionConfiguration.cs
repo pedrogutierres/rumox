@@ -1,4 +1,5 @@
-﻿using Core.Domain.CommandHandlers;
+﻿using Catalogo.Infra.CrossCutting.DI;
+using Core.Domain.CommandHandlers;
 using Core.Domain.Interfaces;
 using Core.Domain.Notifications;
 using Core.Infra.CrossCutting.Identity.Models;
@@ -38,7 +39,7 @@ namespace Rumox.API.Configurations
             //services.AddScoped<ILogger<EmailSender>, Logger<EmailSender>>();
             //services.AddScoped<GlobalActionLogger>();
 
-            //BootstrapperCatalogo.RegisterServices(services);
+            BootstrapperCatalogo.RegisterServices(services);
         }
     }
 }

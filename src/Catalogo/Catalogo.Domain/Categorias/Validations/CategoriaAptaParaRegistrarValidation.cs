@@ -20,7 +20,7 @@ namespace Catalogo.Domain.Categorias.Validations
         {
             RuleFor(p => p.Nome)
                 .IsValid(new CategoriaDeveTerNomeUnicoSpecification(Entidade, _categoriaRepository))
-                .WithMessage("O nome da categoria deve ser único.");
+                .WithMessage("O nome da categoria já está sendo utilizado.");
         }
     }
 }

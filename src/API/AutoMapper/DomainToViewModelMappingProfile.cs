@@ -1,4 +1,8 @@
 ﻿using AutoMapper;
+using Catalogo.Domain.Categorias;
+using Catalogo.Domain.Produtos;
+using Rumox.API.ViewModels.Categorias;
+using Rumox.API.ViewModels.Produtos;
 
 namespace Rumox.API.AutoMapper
 {
@@ -6,7 +10,8 @@ namespace Rumox.API.AutoMapper
     {
         public DomainToViewModelMappingProfile()
         {
-            //CreateMap<Produto, ProdutoViewModel>();
+            CreateMap<Categoria, CategoriaViewModel>();
+            CreateMap<Produto, ProdutoViewModel>();
         }
     }
 }
