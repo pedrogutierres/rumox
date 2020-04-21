@@ -21,11 +21,6 @@ namespace Core.Domain.Models
 
         public static implicit operator bool(Entity<T> @this) => @this != null && @this.EhValido();
 
-        public void NovoValidationResult(ValidationResult validationResult)
-        {
-            ValidationResult = validationResult;
-        }
-
         public void AdicionarValidationResultErros(ValidationResult validationResult)
         {
             foreach (var error in validationResult.Errors)

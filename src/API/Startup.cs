@@ -1,18 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Core.Domain.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Rumox.API.Configurations;
 
@@ -47,27 +41,20 @@ namespace Rumox.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            app.UseExceptionHandler(errorApp =>
             {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler(errorApp =>
+                errorApp.Run(async context =>
                 {
-                    errorApp.Run(async context =>
-                    {
-                        var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerFeature>();
+                    var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerFeature>();
 
-                        if (exceptionHandlerPathFeature != null)
-                        {
-                            context.Response.StatusCode = 500;
-                            context.Response.ContentType = "application/json";
-                            await context.Response.WriteAsync(JsonConvert.SerializeObject(new { error = exceptionHandlerPathFeature.Error?.Message }));
-                        }
-                    });
+                    if (exceptionHandlerPathFeature != null)
+                    {
+                        context.Response.StatusCode = 500;
+                        context.Response.ContentType = "application/json";
+                        await context.Response.WriteAsync(JsonConvert.SerializeObject(new { error = exceptionHandlerPathFeature.Error?.AgruparTodasAsMensagens() }));
+                    }
                 });
-            }
+            });
 
             app.UseSwagger();
 

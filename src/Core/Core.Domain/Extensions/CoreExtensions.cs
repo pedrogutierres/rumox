@@ -23,7 +23,9 @@ namespace Core.Domain.Extensions
             while (tmp.InnerException != null)
             {
                 tmp = tmp.InnerException;
-                msg.AppendLine(tmp.Message);
+                
+                msg.AppendLine();
+                msg.Append(tmp.Message);
             }
 
             return msg.ToString();

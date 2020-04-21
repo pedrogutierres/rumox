@@ -7,7 +7,7 @@ namespace FluentValidation
     {
         public static IRuleBuilderOptions<T, TProperty> IsValid<T, TProperty>(this IRuleBuilder<T, TProperty> ruleBuilder, DomainSpecification<T> predicate) where T : Entity<T>
         {
-            return ruleBuilder.Must(p => predicate.IsValid());
+            return ruleBuilder.Must(p => predicate.EhValido());
         }
 
         public static IRuleBuilderOptions<T, string> Date<T>(this IRuleBuilder<T, string> ruleBuilder, string expression)

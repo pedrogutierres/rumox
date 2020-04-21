@@ -4,7 +4,6 @@ using Core.Domain.Notifications;
 using FluentValidation.Results;
 using MediatR;
 using System;
-using System.Text;
 
 namespace Core.Domain.Services
 {

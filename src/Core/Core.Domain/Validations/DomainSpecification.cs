@@ -4,13 +4,13 @@ namespace Core.Domain.Validations
 {
     public abstract class DomainSpecification<TEntity> where TEntity : Entity<TEntity>
     {
-        protected readonly TEntity _entidade;
+        protected readonly TEntity Entidade;
 
         protected DomainSpecification(TEntity entidade)
         {
-            _entidade = entidade;
+            Entidade = entidade;
         }
 
-        public abstract bool IsValid();
+        public abstract bool EhValido();
     }
 }
