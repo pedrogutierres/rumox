@@ -3,7 +3,13 @@ version: '3.7'
 services:
 
   mysql:
+    container_name: rumox-test-mysql
+    volumes:
+      - rumox-test-mysql-vol:/var/lib/mysql
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: test
+      
+volumes:
+  rumox-test-mysql-vol:
