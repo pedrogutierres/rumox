@@ -30,7 +30,7 @@ namespace Rumox.API.Tests.Config
 
             var configuration = (IConfiguration)Factory.Services.GetService(typeof(IConfiguration));
 
-            // TODO: Refatorar depois essa dependencia direta
+            // TODO: Refatorar este acoplamento
             Catalogo = new MySQLSetup(configuration);
         }
 

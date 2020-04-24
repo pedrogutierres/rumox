@@ -18,3 +18,6 @@ docker-compose -f docker-compose.yml -f docker-compose.test.yml up -d
 - O teste de integração por agora executa apenas testes que retornarão sucesso na execução
 - Testes para criar novos registros executam uma repetição de 10x, realizando assim 10 vezes o mesmo teste para que se crie 10 registros
 - Os testes mantém em geral uma ordem, pois algumas entidades dependem de outras, exemplo: para registrar um produto precisa-se previamente de categorias registradas, sendo assim, é recomendado executar todos os testes de integração em conjunto
+
+### Débitos técnicos
+- Refatorar funcionalidade que limpa os dados do banco de dados antes de inicializar os testes

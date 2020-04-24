@@ -10,3 +10,7 @@
 - O método PUT será utilizado para atualizar entidades mesmo que parcialmente, e também não irá registrar uma nova entidade caso a mesma ainda não exista
 - O método PATCH será utilizado quando a atualização da entidade for partes menores ou em um único ponto específico, exemplo: ativar ou inativar
 - O método GET em geral irá retornar status 200 (Ok) quando encontrar o recurso ou status 404 (NotFound) quando não encontrar, se for uma lista mesmo que vazia irá retornar status 200 (Ok)
+
+### Débitos técnicos
+- Implementar EventStore corretamente (hoje está apenas simbólico)
+- Refatorar local da secret key da autenticação JWT
