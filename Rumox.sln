@@ -38,9 +38,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalogo.Domain", "src\Cata
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalogo.Events", "src\Catalogo\Catalogo.Events\Catalogo.Events.csproj", "{C187E404-BF75-4B24-844E-FA988AA34D87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalogo.Infra.Data.MySQL", "src\Catalogo\Catalogo.Infra.Data.MySQL\Catalogo.Infra.Data.MySQL.csproj", "{4BBBCF19-FE73-4311-9117-8F806902F3A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalogo.Infra.Data.MySQL", "src\Catalogo\Catalogo.Infra.Data.MySQL\Catalogo.Infra.Data.MySQL.csproj", "{4BBBCF19-FE73-4311-9117-8F806902F3A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalogo.Infra.CrossCutting.DI", "src\Catalogo\Catalogo.Infra.CrossCutting.DI\Catalogo.Infra.CrossCutting.DI.csproj", "{02DC4234-BDF0-4374-B8AC-AE2868270778}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalogo.Infra.CrossCutting.DI", "src\Catalogo\Catalogo.Infra.CrossCutting.DI\Catalogo.Infra.CrossCutting.DI.csproj", "{02DC4234-BDF0-4374-B8AC-AE2868270778}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4FF106F1-0ACA-403A-94B4-E349EB2BD48B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A448C877-398C-46A0-9169-34A5A49203DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalogo.Domain.Tests", "tests\Catalogo.Domain.Tests\Catalogo.Domain.Tests.csproj", "{56F55A7B-2DFB-4376-B0B4-145ED716D03C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -130,6 +136,14 @@ Global
 		{02DC4234-BDF0-4374-B8AC-AE2868270778}.Release|Any CPU.Build.0 = Release|Any CPU
 		{02DC4234-BDF0-4374-B8AC-AE2868270778}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
 		{02DC4234-BDF0-4374-B8AC-AE2868270778}.Tests|Any CPU.Build.0 = Debug|Any CPU
+		{56F55A7B-2DFB-4376-B0B4-145ED716D03C}.ConsumirAPI|Any CPU.ActiveCfg = Debug|Any CPU
+		{56F55A7B-2DFB-4376-B0B4-145ED716D03C}.ConsumirAPI|Any CPU.Build.0 = Debug|Any CPU
+		{56F55A7B-2DFB-4376-B0B4-145ED716D03C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56F55A7B-2DFB-4376-B0B4-145ED716D03C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56F55A7B-2DFB-4376-B0B4-145ED716D03C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56F55A7B-2DFB-4376-B0B4-145ED716D03C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56F55A7B-2DFB-4376-B0B4-145ED716D03C}.Tests|Any CPU.ActiveCfg = Debug|Any CPU
+		{56F55A7B-2DFB-4376-B0B4-145ED716D03C}.Tests|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +159,8 @@ Global
 		{C187E404-BF75-4B24-844E-FA988AA34D87} = {4ACC1B14-D3FE-40DC-8CB1-FF708BC99D18}
 		{4BBBCF19-FE73-4311-9117-8F806902F3A8} = {4ACC1B14-D3FE-40DC-8CB1-FF708BC99D18}
 		{02DC4234-BDF0-4374-B8AC-AE2868270778} = {4ACC1B14-D3FE-40DC-8CB1-FF708BC99D18}
+		{A448C877-398C-46A0-9169-34A5A49203DD} = {4ACC1B14-D3FE-40DC-8CB1-FF708BC99D18}
+		{56F55A7B-2DFB-4376-B0B4-145ED716D03C} = {A448C877-398C-46A0-9169-34A5A49203DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3558B6B8-1AFC-44DE-B097-87D7A1E9AABD}

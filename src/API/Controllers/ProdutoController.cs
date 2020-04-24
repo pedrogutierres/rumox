@@ -101,22 +101,15 @@ namespace Rumox.API.Controllers
             return Response(produto.Id);
         }
 
-        [HttpPatch("{id:guid}/ativar")]
+        [HttpPatch("{id:guid}/situacao")]
         [ProducesResponseType(typeof(ResponseSuccess), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AtivarProduto([FromRoute]Guid id)
+        public async Task<IActionResult> AlterarSituacaoProduto([FromRoute]Guid id, [FromBody]AlterarSituacaoProdutoViewModel viewModel)
         {
-            await _produtoService.Ativar(id);
-
-            return Response(id);
-        }
-
-        [HttpPatch("{id:guid}/inativar")]
-        [ProducesResponseType(typeof(ResponseSuccess), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> InativarProduto([FromRoute]Guid id)
-        {
-            await _produtoService.Inativar(id);
+            if (viewModel.Ativo)
+                await _produtoService.Ativar(id);
+            else
+                await _produtoService.Inativar(id);
 
             return Response(id);
         }
