@@ -25,6 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalogo", "Catalogo", "{4A
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CRM", "CRM", "{A51A022C-6F37-4019-B76F-437E71E3DA32}"
+	ProjectSection(SolutionItems) = preProject
+		src\CRM\README.md = src\CRM\README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pagamento", "Pagamento", "{901C2377-AEAF-4538-9F6A-21E1D9C22D71}"
 EndProject
@@ -50,13 +53,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalogo.Domain.Tests", "te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rumox.API.Tests", "tests\Rumox.API.Tests\Rumox.API.Tests.csproj", "{79337A37-6AE8-46E2-93D9-B5EF027AD8D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM.Domain", "src\CRM\CRM.Domain\CRM.Domain.csproj", "{2C3BCD09-29E0-4752-AF7F-7A84FF3F8E9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRM.Domain", "src\CRM\CRM.Domain\CRM.Domain.csproj", "{2C3BCD09-29E0-4752-AF7F-7A84FF3F8E9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM.Events", "src\CRM\CRM.Events\CRM.Events.csproj", "{CEC145CB-8990-4309-9A2D-FEE9F6D03B6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRM.Events", "src\CRM\CRM.Events\CRM.Events.csproj", "{CEC145CB-8990-4309-9A2D-FEE9F6D03B6A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0CDCA309-8326-43C0-9726-61C64E48AC3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRM.Domain.Tests", "tests\CRM.Domain.Tests\CRM.Domain.Tests.csproj", "{AA0C19C5-A4F4-4425-B233-631683477416}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRM.Domain.Tests", "tests\CRM.Domain.Tests\CRM.Domain.Tests.csproj", "{AA0C19C5-A4F4-4425-B233-631683477416}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

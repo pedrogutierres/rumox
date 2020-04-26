@@ -17,6 +17,7 @@ namespace CRM.Domain.Clientes
         public DateTime DataHoraCriacao { get; private set; }
         public DateTime? DataHoraAlteracao { get; private set; }
 
+        private Cliente() { }
         public Cliente(Guid id, CPF cpf, string nome, string sobrenome, string email, DateTime dataHoraCadastro, ClienteSenha senha)
         {
             Id = id;
