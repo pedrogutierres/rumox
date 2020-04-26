@@ -14,10 +14,10 @@ namespace CRM.Domain.Clientes
         public string Email { get; private set; }
         public ClienteSenha Senha { get; private set; }
         public bool Ativo { get; private set; } = true;
-        public DateTime DataHoraCriacao { get; private set; } = DateTime.Now;
+        public DateTime DataHoraCriacao { get; private set; }
         public DateTime? DataHoraAlteracao { get; private set; }
 
-        public Cliente(Guid id, CPF cpf, string nome, string sobrenome, string email, ClienteSenha senha)
+        public Cliente(Guid id, CPF cpf, string nome, string sobrenome, string email, DateTime dataHoraCadastro, ClienteSenha senha)
         {
             Id = id;
             CPF = cpf;
@@ -25,6 +25,7 @@ namespace CRM.Domain.Clientes
             Sobrenome = sobrenome;
             Email = email;
             Senha = senha;
+            DataHoraCriacao = dataHoraCadastro;
         }
 
         public void AlterarDados(string nome, string sobrenome)

@@ -30,12 +30,12 @@ namespace CRM.Domain.Clientes.ValuesObjects
 
         public class Factory
         {
-            public static ClienteSenha NovaSenha(string senha, DateTime dataHora)
+            public static ClienteSenha NovaSenha(string senha, DateTime dataHoraCadastro)
             {
                 if (string.IsNullOrEmpty(senha.Trim()))
                     return new ClienteSenha("");
 
-                var senhaMD5 = CriptografarMD5($"{senha}-rumox-{dataHora:ddMMyyyy}");
+                var senhaMD5 = CriptografarMD5($"{senha}-rumox-{dataHoraCadastro:ddMMyyyy}");
 
                 return new ClienteSenha(senhaMD5);
             }

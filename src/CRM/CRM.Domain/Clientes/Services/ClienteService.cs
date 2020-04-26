@@ -4,6 +4,7 @@ using Core.Domain.Services;
 using CRM.Domain.Clientes.Events;
 using CRM.Domain.Clientes.Interfaces;
 using CRM.Domain.Clientes.Validations;
+using CRM.Domain.Interfaces;
 using MediatR;
 using System;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace CRM.Domain.Clientes.Services
 
         public ClienteService(
             IClienteRepository clienteRepository,
-            IUnitOfWork uow, 
+            IUnitOfWorkCRM uow, 
             IMediatorHandler mediator, 
             INotificationHandler<DomainNotification> notifications) 
             : base(uow, mediator, notifications)
