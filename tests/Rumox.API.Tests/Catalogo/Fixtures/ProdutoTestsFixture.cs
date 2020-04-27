@@ -24,7 +24,7 @@ namespace Rumox.API.Tests.Catalogo.Fixtures
                 }).Generate();
         }
 
-        public object GerarAlterarProdutoViewModel(Guid categoriaId)
+        public object GerarAtualizarProdutoViewModel(Guid categoriaId)
         {
             return new Faker<object>("pt_BR")
                  .CustomInstantiator(f => new

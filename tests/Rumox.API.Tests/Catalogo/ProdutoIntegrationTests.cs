@@ -93,7 +93,7 @@ namespace Rumox.API.Tests.Catalogo
         {
             // Arrange
             var produtoRegistrado = await ObterProdutoRegistrada();
-            var produto = _produtoTestsFixture.GerarAlterarProdutoViewModel(await ObterCategoriaIdRegistrada());
+            var produto = _produtoTestsFixture.GerarAtualizarProdutoViewModel(await ObterCategoriaIdRegistrada());
 
             // Act
             var response = await _testsFixture.Client.PutAsJsonAsync($"catalogo/produtos/{produtoRegistrado.Id}", produto);

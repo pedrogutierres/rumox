@@ -90,7 +90,7 @@ namespace Rumox.API.Tests.Catalogo
         {
             // Arrange
             var categoriaRegistrada = await ObterCategoriaRegistrada();
-            var categoria = _categoriaTestsFixture.GerarAlterarCategoriaViewModel();
+            var categoria = _categoriaTestsFixture.GerarAtualizarCategoriaViewModel();
 
             // Act
             var response = await _testsFixture.Client.PutAsJsonAsync($"catalogo/categorias/{categoriaRegistrada.Id}", categoria);

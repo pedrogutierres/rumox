@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using Core.Infra.MySQL;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
@@ -15,7 +16,7 @@ namespace Rumox.API.Tests.Catalogo.Setup
 
         public MySQLSetup(IConfiguration configuration)
         {
-            var connectionString = configuration?.GetConnectionString("MySQL");
+            var connectionString = configuration?.GetMySQLDbConnectionString();
 
             Db = new MySqlConnection(connectionString);
 

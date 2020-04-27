@@ -121,7 +121,8 @@ namespace Rumox.API.Controllers
             return Response(id);
         }
 
-        [HttpDelete("{id:guid}/cancelar")]
+        // TODO: verificar a possibilidade de refatorar para HttpDelete
+        [HttpPatch("{id:guid}/cancelar")]
         [ProducesResponseType(typeof(ResponseSuccess), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AlterarSituacaoCliente([FromRoute]Guid id, [FromBody]CancelarContaClienteViewModel model)

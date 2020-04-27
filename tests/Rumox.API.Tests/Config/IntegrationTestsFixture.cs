@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
 using Rumox.API.Tests.Catalogo.Setup;
+using Rumox.API.Tests.CRM.Setup;
 using System;
 using System.Net.Http;
 using Xunit;
@@ -17,6 +18,7 @@ namespace Rumox.API.Tests.Config
         public HttpClient Client;
 
         private readonly MySQLSetup Catalogo;
+        private readonly MongoSetup CRM;
 
         public IntegrationTestsFixture()
         {
@@ -32,6 +34,7 @@ namespace Rumox.API.Tests.Config
 
             // TODO: Refatorar este acoplamento
             Catalogo = new MySQLSetup(configuration);
+            CRM = new MongoSetup(configuration);
         }
 
         public void Dispose()
@@ -39,6 +42,7 @@ namespace Rumox.API.Tests.Config
             Client.Dispose();
             Factory.Dispose();
             Catalogo.Dispose();
+            CRM.Dispose();
         }
     }
 }

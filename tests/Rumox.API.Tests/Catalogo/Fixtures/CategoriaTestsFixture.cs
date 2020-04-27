@@ -35,7 +35,7 @@ namespace Rumox.API.Tests.Catalogo.Fixtures
                 }).Generate();
         }
 
-        public object GerarAlterarCategoriaViewModel()
+        public object GerarAtualizarCategoriaViewModel()
         {
             var nomeCategoria = NomesCategorias.FirstOrDefault(p => !p.Value).Key;
             NomesCategorias[nomeCategoria] = true;
