@@ -4,6 +4,7 @@ using Core.Domain.Services;
 using CRM.Domain.Clientes.Events;
 using CRM.Domain.Clientes.Interfaces;
 using CRM.Domain.Clientes.Validations;
+using CRM.Domain.Clientes.ValuesObjects;
 using CRM.Domain.Interfaces;
 using MediatR;
 using System;
@@ -37,7 +38,7 @@ namespace CRM.Domain.Clientes.Services
                 return;
             }
 
-            _clienteRepository.Registrar(cliente);
+            await _clienteRepository.Registrar(cliente);
 
             if (!Commit())
                 return;
@@ -57,7 +58,7 @@ namespace CRM.Domain.Clientes.Services
                 return;
             }
 
-            _clienteRepository.Atualizar(cliente);
+            await _clienteRepository.Atualizar(cliente);
 
             if (!Commit())
                 return;
@@ -82,7 +83,7 @@ namespace CRM.Domain.Clientes.Services
                 return;
             }
 
-            _clienteRepository.Atualizar(cliente);
+            await _clienteRepository.Atualizar(cliente);
 
             if (!Commit())
                 return;
@@ -90,14 +91,20 @@ namespace CRM.Domain.Clientes.Services
             await _mediator.RaiseEvent(ClienteAdapter.ToClienteEmailAlteradoEvent(cliente));
         }
 
-        public async Task CancelarConta(Guid id)
+        public async Task CancelarConta(Guid id, string senha)
         {
             var cliente = await ObterCliente(id, "AlterarEmail");
             if (cliente == null) return;
 
+            if (ClienteSenha.Factory.NovaSenha(senha, cliente.DataHoraCriacao) != cliente.Senha)
+            {
+                NotificarErro("CancelarConta", "A senha do cliente está incorreta.");
+                return;
+            }
+
             cliente.CancelarConta();
 
-            _clienteRepository.Atualizar(cliente);
+            await _clienteRepository.Atualizar(cliente);
 
             if (!Commit())
                 return;

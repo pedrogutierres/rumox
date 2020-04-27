@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace Core.Mongo
+namespace Core.Infra.Mongo
 {
     public static class MongoDbConfiguration
     {

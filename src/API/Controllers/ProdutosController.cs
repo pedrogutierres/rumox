@@ -17,13 +17,13 @@ using System.Threading.Tasks;
 namespace Rumox.API.Controllers
 {
     [Route("catalogo/produtos")]
-    public class ProdutoController : BaseController
+    public class ProdutosController : BaseController
     {
         private readonly IMapper _mapper;
         private readonly IProdutoService _produtoService;
         private readonly IProdutoRepository _produtoRepository;
 
-        public ProdutoController(
+        public ProdutosController(
             IMapper mapper,
             IProdutoService produtoService,
             IProdutoRepository produtoRepository,
@@ -104,9 +104,9 @@ namespace Rumox.API.Controllers
         [HttpPatch("{id:guid}/situacao")]
         [ProducesResponseType(typeof(ResponseSuccess), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AlterarSituacaoProduto([FromRoute]Guid id, [FromBody]AlterarSituacaoProdutoViewModel viewModel)
+        public async Task<IActionResult> AlterarSituacaoProduto([FromRoute]Guid id, [FromBody]AlterarSituacaoProdutoViewModel model)
         {
-            if (viewModel.Ativo)
+            if (model.Ativo)
                 await _produtoService.Ativar(id);
             else
                 await _produtoService.Inativar(id);

@@ -76,6 +76,23 @@ namespace CRM.Domain.Tests.Clientes
                   .Generate();
         }
 
+        public Cliente GerarClienteValidoComSenhaPreDefina(string senha)
+        {
+            var dataHoraCadastro = DateTime.Now;
+            var person = _faker.Person;
+
+            return new Faker<Cliente>("pt_BR")
+                  .CustomInstantiator(f => new Cliente(
+                      Guid.NewGuid(),
+                      new CPF(person.Cpf(false)),
+                      person.FirstName,
+                      person.LastName,
+                      person.Email,
+                      dataHoraCadastro,
+                      ClienteSenha.Factory.NovaSenha(senha, dataHoraCadastro)))
+                  .Generate();
+        }
+
         public IClienteService ObterClienteService()
         {
             Mocker = new AutoMocker();

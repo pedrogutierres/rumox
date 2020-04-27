@@ -33,16 +33,24 @@ namespace CRM.Domain.Clientes
         {
             Nome = nome;
             Sobrenome = sobrenome;
+            NotificarAlteracao();
         }
 
         public void AlterarEmail(string email)
         {
             Email = email;
+            NotificarAlteracao();
         }
 
         public void CancelarConta()
         {
             Ativo = false;
+            NotificarAlteracao();
+        }
+
+        private void NotificarAlteracao()
+        {
+            DataHoraAlteracao = DateTime.Now;
         }
 
         public override bool EhValido()

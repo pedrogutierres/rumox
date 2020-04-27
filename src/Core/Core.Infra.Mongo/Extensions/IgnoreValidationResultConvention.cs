@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 
-namespace Core.Mongo
+namespace Core.Infra.Mongo
 {
     public class IgnoreValidationResultConvention : ConventionBase, IMemberMapConvention
     {

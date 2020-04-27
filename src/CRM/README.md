@@ -4,7 +4,7 @@
 - Pomelo MySQL
 
 ## Banco de dados
-- ???
+- MongoDB
 
 ## Decisões técnicas
 - Eventos são criados com apenas aquilo que foi realizado na entidade (novo registro, uma alteração parcial)

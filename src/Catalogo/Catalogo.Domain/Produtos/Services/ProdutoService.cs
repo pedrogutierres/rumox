@@ -37,7 +37,7 @@ namespace Catalogo.Domain.Produtos.Services
                 return;
             }
 
-            _produtoRepository.Registrar(produto);
+            await _produtoRepository.Registrar(produto);
 
             if (!Commit())
                 return;
@@ -57,7 +57,7 @@ namespace Catalogo.Domain.Produtos.Services
                 return;
             }
 
-            _produtoRepository.Atualizar(produto);
+            await _produtoRepository.Atualizar(produto);
 
             if (!Commit())
                 return;
@@ -72,7 +72,7 @@ namespace Catalogo.Domain.Produtos.Services
 
             produto.Ativar();
 
-            _produtoRepository.Atualizar(produto);
+            await _produtoRepository.Atualizar(produto);
 
             if (!Commit())
                 return;
@@ -87,7 +87,7 @@ namespace Catalogo.Domain.Produtos.Services
 
             produto.Inativar();
 
-            _produtoRepository.Atualizar(produto);
+            await _produtoRepository.Atualizar(produto);
 
             if (!Commit())
                 return;

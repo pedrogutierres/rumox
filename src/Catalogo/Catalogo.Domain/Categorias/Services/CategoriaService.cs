@@ -41,7 +41,7 @@ namespace Catalogo.Domain.Categorias.Services
                 return;
             }
 
-            _categoriaRepository.Registrar(categoria);
+            await _categoriaRepository.Registrar(categoria);
 
             if (!Commit())
                 return;
@@ -61,7 +61,7 @@ namespace Catalogo.Domain.Categorias.Services
                 return;
             }
 
-            _categoriaRepository.Atualizar(categoria);
+            await _categoriaRepository.Atualizar(categoria);
 
             if (!Commit())
                 return;
@@ -81,7 +81,7 @@ namespace Catalogo.Domain.Categorias.Services
                 return;
             }
 
-            _categoriaRepository.Deletar(id);
+            await _categoriaRepository.Deletar(id);
 
             if (!Commit())
                 return;

@@ -15,13 +15,13 @@ using System.Threading.Tasks;
 namespace Rumox.API.Controllers
 {
     [Route("catalogo/categorias")]
-    public class CategoriaController : BaseController
+    public class CategoriasController : BaseController
     {
         private readonly IMapper _mapper;
         private readonly ICategoriaService _categoriaService;
         private readonly ICategoriaRepository _categoriaRepository;
 
-        public CategoriaController(
+        public CategoriasController(
             IMapper mapper,
             ICategoriaService categoriaService,
             ICategoriaRepository categoriaRepository,

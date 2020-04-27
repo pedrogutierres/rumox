@@ -2,7 +2,7 @@
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 
-namespace Core.Mongo.Extensions
+namespace Core.Infra.Mongo.Extensions
 {
     public static class DefaultConventionsExtension
     {

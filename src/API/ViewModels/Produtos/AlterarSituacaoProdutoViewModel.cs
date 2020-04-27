@@ -1,7 +1,10 @@
-﻿namespace Rumox.API.ViewModels.Produtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Rumox.API.ViewModels.Produtos
 {
     public class AlterarSituacaoProdutoViewModel
     {
-        public bool Ativo { get; set; }
+        [Required(ErrorMessage = "A situação do produto deve ser informada.")]
+        public bool Ativo { get; set; } = true;
     }
 }

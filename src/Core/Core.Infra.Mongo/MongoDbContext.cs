@@ -1,10 +1,10 @@
-﻿using Core.Mongo.Extensions;
+﻿using Core.Infra.Mongo.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using System;
 
-namespace Core.Mongo
+namespace Core.Infra.Mongo
 {
     public abstract class MongoDbContext : IDisposable
     {

@@ -20,14 +20,21 @@ namespace Catalogo.Infra.Data.MySQL.Repositories
             DbSet = Db.Set<TEntity>();
         }
 
-        public virtual void Registrar(TEntity obj)
+        public virtual async Task Registrar(TEntity obj)
         {
-            DbSet.Add(obj);
+            await DbSet.AddAsync(obj);
         }
 
-        public virtual void Atualizar(TEntity obj)
+        public virtual Task Atualizar(TEntity obj)
         {
             DbSet.Update(obj);
+            return Task.CompletedTask;
+        }
+
+        public virtual Task Deletar(Guid id)
+        {
+            DbSet.Remove(DbSet.Find(id));
+            return Task.CompletedTask;
         }
 
         public virtual IQueryable<TEntity> Buscar(Expression<Func<TEntity, bool>> predicate)
@@ -43,11 +50,6 @@ namespace Catalogo.Infra.Data.MySQL.Repositories
         public Task<bool> ExistePorId(Guid id)
         {
             return DbSet.AsNoTracking().AnyAsync(t => t.Id == id);
-        }
-
-        public virtual void Deletar(Guid id)
-        {
-            DbSet.Remove(DbSet.Find(id));
         }
 
         public int SaveChanges()

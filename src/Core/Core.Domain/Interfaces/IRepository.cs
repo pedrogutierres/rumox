@@ -8,9 +8,9 @@ namespace Core.Domain.Interfaces
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : Entity<TEntity>
     {
-        void Registrar(TEntity obj);
-        void Atualizar(TEntity obj);
-        void Deletar(Guid id);
+        Task Registrar(TEntity obj);
+        Task Atualizar(TEntity obj);
+        Task Deletar(Guid id);
 
         Task<TEntity> ObterPorId(Guid id);
         Task<bool> ExistePorId(Guid id);

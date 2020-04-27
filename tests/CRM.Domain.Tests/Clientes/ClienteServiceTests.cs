@@ -148,13 +148,14 @@ namespace CRM.Domain.Tests.Clientes
         public void ClienteService_CancelarConta_ExecutarComSucesso()
         {
             // Arrange
-            var cliente = _clienteTestsFixture.GerarClienteValido();
+            var senhaPreDefinica = "Rumox123";
+            var cliente = _clienteTestsFixture.GerarClienteValidoComSenhaPreDefina(senhaPreDefinica);
 
             _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(true);
             _clienteTestsFixture.Mocker.GetMock<IClienteRepository>().Setup(p => p.ObterPorId(cliente.Id)).Returns(Task.FromResult(cliente));
 
             // Act
-            _clienteService.CancelarConta(cliente.Id);
+            _clienteService.CancelarConta(cliente.Id, senhaPreDefinica);
 
             // Assert
             _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Verify(p => p.Commit(), Times.Once);

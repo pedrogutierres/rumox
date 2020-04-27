@@ -3,6 +3,7 @@ using Core.Domain.CommandHandlers;
 using Core.Domain.Interfaces;
 using Core.Domain.Notifications;
 using Core.Infra.CrossCutting.Identity.Models;
+using CRM.Infra.CrossCutting.DI;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,6 +41,7 @@ namespace Rumox.API.Configurations
             //services.AddScoped<GlobalActionLogger>();
 
             BootstrapperCatalogo.RegisterServices(services);
+            BootstrapperCRM.RegisterServices(services);
         }
     }
 }
