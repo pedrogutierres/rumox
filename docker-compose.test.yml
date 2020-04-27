@@ -10,6 +10,14 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: test
+
+  mongo:
+    container_name: rumox-test-mongo
+    volumes:
+      - rumox-test-mongo-vol:/data/db
+    ports:
+      - 27017:27017
       
 volumes:
   rumox-test-mysql-vol:
+  rumox-test-mongo-vol:

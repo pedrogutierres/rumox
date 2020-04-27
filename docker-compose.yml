@@ -15,8 +15,17 @@ services:
       - rumox-net
     command: --sql_mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
 
+  mongo:
+    image: mongo:4.2
+    container_name: rumox-mongo
+    volumes:
+      - rumox-mongo-vol:/data/db
+    networks:
+      - rumox-net
+
 networks:
   rumox-net:
 
 volumes:
   rumox-mysql-vol:
+  rumox-mongo-vol:
