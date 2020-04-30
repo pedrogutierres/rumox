@@ -16,3 +16,6 @@
 ### Débitos técnicos
 - Implementar EventStore corretamente (hoje está apenas simbólico)
 - Refatorar local da secret key da autenticação JWT
+
+#### Outros débitos
+- Definir melhor a linguagem ubiqua de clientes/usuários
