@@ -6,6 +6,7 @@ using CRM.Domain.Clientes.Interfaces;
 using CRM.Domain.Clientes.Validations;
 using CRM.Domain.Clientes.ValuesObjects;
 using CRM.Domain.Interfaces;
+using CRM.Events.Clientes;
 using MediatR;
 using System;
 using System.Threading.Tasks;
@@ -91,12 +92,46 @@ namespace CRM.Domain.Clientes.Services
             await _mediator.RaiseEvent(ClienteAdapter.ToClienteEmailAlteradoEvent(cliente));
         }
 
-        public async Task CancelarConta(Guid id, string senha)
+        public async Task AlterarSenha(Guid id, string senhaAtual, string novaSenha, bool ignorarSenhaAtual = false)
         {
-            var cliente = await ObterCliente(id, "AlterarEmail");
+            var cliente = await ObterCliente(id, "AlterarSenha");
             if (cliente == null) return;
 
-            if (ClienteSenha.Factory.NovaSenha(senha, cliente.DataHoraCriacao) != cliente.Senha)
+            if (!ignorarSenhaAtual)
+            {
+                if (!cliente.Senha.Equals(ClienteSenha.Factory.NovaSenha(senhaAtual, cliente.DataHoraCriacao)))
+                {
+                    NotificarErro("AlterarSenha", "A senha atual do cliente está incorreta.");
+                    return;
+                }
+            }
+
+            cliente.AlterarSenha(ClienteSenha.Factory.NovaSenha(novaSenha, cliente.DataHoraCriacao));
+
+            if (!ClienteValido(cliente))
+                return;
+
+            var validation = new ClienteAptoParaAtualizarValidation(cliente, _clienteRepository).Validate(cliente);
+            if (!validation.IsValid)
+            {
+                NotificarValidacoesErro(validation);
+                return;
+            }
+
+            await _clienteRepository.Atualizar(cliente);
+
+            if (!Commit())
+                return;
+
+            await _mediator.RaiseEvent(new ClienteSenhaAlteradaEvent(cliente.Id));
+        }
+
+        public async Task CancelarConta(Guid id, string senha)
+        {
+            var cliente = await ObterCliente(id, "CancelarConta");
+            if (cliente == null) return;
+
+            if (!cliente.Senha.Equals(ClienteSenha.Factory.NovaSenha(senha, cliente.DataHoraCriacao)))
             {
                 NotificarErro("CancelarConta", "A senha do cliente está incorreta.");
                 return;
@@ -123,7 +158,7 @@ namespace CRM.Domain.Clientes.Services
 
             if (cliente != null) return cliente;
 
-            await _mediator.RaiseEvent(new DomainNotification(messageType, "Cliente não encontrado."));
+            NotificarErro(messageType, "Cliente não encontrado.");
             return null;
         }
 

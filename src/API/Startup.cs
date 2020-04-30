@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Rumox.API.Configurations;
+using Rumox.API.Extensions;
 
 namespace Rumox.API
 {
@@ -28,6 +29,8 @@ namespace Rumox.API
             services.AddConrollersConfiguration();
 
             services.AddMvcSecurity(Configuration);
+
+            services.AddCacheConfiguration(Configuration);
 
             services.AddAutoMapperSetup();
 

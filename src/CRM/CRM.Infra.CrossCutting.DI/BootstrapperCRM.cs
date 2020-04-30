@@ -3,6 +3,7 @@ using CRM.Domain.Clientes.Interfaces;
 using CRM.Domain.Clientes.Services;
 using CRM.Domain.Interfaces;
 using CRM.Events.Clientes;
+using CRM.Infra.CrossCutting.Identity.Clientes;
 using CRM.Infra.Data.Mongo.Context;
 using CRM.Infra.Data.Mongo.Repositories;
 using CRM.Infra.Data.Mongo.UoW;
@@ -17,6 +18,7 @@ namespace CRM.Infra.CrossCutting.DI
         {
             // Domain - Services
             services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IClienteIdentityService, ClienteIdentityService>();
 
             // Domain - Events
             services.AddScoped<INotificationHandler<ClienteRegistradoEvent>, ClienteEventHandler>();

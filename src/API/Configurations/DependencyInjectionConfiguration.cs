@@ -3,10 +3,12 @@ using Core.Domain.CommandHandlers;
 using Core.Domain.Interfaces;
 using Core.Domain.Notifications;
 using Core.Infra.CrossCutting.Identity.Models;
+using Core.Infra.CrossCutting.Identity.Services;
 using CRM.Infra.CrossCutting.DI;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Rumox.API.JwtToken;
 
 namespace Rumox.API.Configurations
 {
@@ -18,7 +20,7 @@ namespace Rumox.API.Configurations
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // JWT
-            //services.AddScoped<JwtTokenGenerate>();
+            services.AddScoped<JwtTokenGenerate>();
 
             // Domain Bus (Mediator)
             services.AddScoped<IMediatorHandler, MediatorHandler>();
@@ -32,7 +34,7 @@ namespace Rumox.API.Configurations
             //services.AddScoped<EventStoreSQLContext>();
 
             // Infra - Identity
-            //services.AddScoped<IEmailSender, EmailSender>();
+            services.AddScoped<IEmailSender, TmpEmailSender>();
             services.AddScoped<IUser, AspNetUser>();
 
             // Infra - Filtros

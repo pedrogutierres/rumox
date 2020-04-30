@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Core.Infra.CrossCutting.Identity.Services
+namespace Core.Domain.Interfaces
 {
     public interface IEmailSender
     {

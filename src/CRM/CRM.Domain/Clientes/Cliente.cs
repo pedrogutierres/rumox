@@ -42,6 +42,12 @@ namespace CRM.Domain.Clientes
             NotificarAlteracao();
         }
 
+        public void AlterarSenha(ClienteSenha senha)
+        {
+            Senha = senha;
+            NotificarAlteracao();
+        }
+
         public void CancelarConta()
         {
             Ativo = false;

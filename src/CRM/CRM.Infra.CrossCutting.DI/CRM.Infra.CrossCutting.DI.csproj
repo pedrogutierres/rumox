@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CRM.Domain\CRM.Domain.csproj" />
+    <ProjectReference Include="..\CRM.Infra.CrossCutting.Identity\CRM.Infra.CrossCutting.Identity.csproj" />
     <ProjectReference Include="..\CRM.Infra.Data.Mongo\CRM.Infra.Data.Mongo.csproj" />
   </ItemGroup>
 

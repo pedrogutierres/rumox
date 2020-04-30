@@ -6,5 +6,6 @@ namespace CRM.Domain.Clientes.Interfaces
     public interface IClienteRepository : IRepository<Cliente>
     {
         Task<Cliente> ObterPorCPF(string cpf);
+        Task<Cliente> ObterPorEmail(string email);
     }
 }

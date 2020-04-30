@@ -16,5 +16,10 @@ namespace CRM.Infra.Data.Mongo.Repositories
         {
             return (await Collection.FindAsync(p => p.CPF.Numero == cpf)).FirstOrDefault();
         }
+
+        public async Task<Cliente> ObterPorEmail(string email)
+        {
+            return (await Collection.FindAsync(p => p.Email == email)).FirstOrDefault();
+        }
     }
 }
