@@ -23,6 +23,12 @@ services:
     networks:
       - rumox-net
 
+  redis:
+    image: redis:5.0
+    container_name: rumox-redis
+    networks:
+      - rumox-net
+
 networks:
   rumox-net:
 
