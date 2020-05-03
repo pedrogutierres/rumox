@@ -4,6 +4,7 @@ using Catalogo.Domain.Produtos.Interface;
 using Core.Domain.Interfaces;
 using Core.Domain.Notifications;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Rumox.API.ResponseType;
@@ -17,6 +18,7 @@ using System.Threading.Tasks;
 namespace Rumox.API.Controllers
 {
     [Route("catalogo/produtos")]
+    [Authorize]
     public class ProdutosController : BaseController
     {
         private readonly IMapper _mapper;

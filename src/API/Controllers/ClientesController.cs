@@ -6,6 +6,7 @@ using CRM.Domain.Clientes;
 using CRM.Domain.Clientes.Interfaces;
 using CRM.Domain.Clientes.ValuesObjects;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Rumox.API.JwtToken;
@@ -20,6 +21,7 @@ using System.Threading.Tasks;
 namespace Rumox.API.Controllers
 {
     [Route("crm/clientes")]
+    [Authorize]
     public class ClientesController : BaseController
     {
         private readonly IMapper _mapper;
@@ -83,6 +85,7 @@ namespace Rumox.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(ResponseSuccess<AuthToken>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RegistrarCliente([FromBody]RegistrarClienteViewModel model)
@@ -99,12 +102,12 @@ namespace Rumox.API.Controllers
             return Response(await _jwtTokenGenerate.GerarToken(cliente));
         }
 
-        [HttpPut("{id:guid}")]
+        [HttpPut()]
         [ProducesResponseType(typeof(ResponseSuccess), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AtualizarCliente([FromRoute]Guid id, [FromBody]AtualizarClienteViewModel model)
+        public async Task<IActionResult> AtualizarCliente([FromBody]AtualizarClienteViewModel model)
         {
-            var cliente = await _clienteRepository.ObterPorId(id);
+            var cliente = await _clienteRepository.ObterPorId(UsuarioId);
             if (cliente == null)
             {
                 NotificarErro("AtualizarCliente", "Cliente não encontrado.");
@@ -118,25 +121,25 @@ namespace Rumox.API.Controllers
             return Response(cliente.Id);
         }
 
-        [HttpPatch("{id:guid}/email")]
+        [HttpPatch("email")]
         [ProducesResponseType(typeof(ResponseSuccess), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AlterarEmailCliente([FromRoute]Guid id, [FromBody]AlterarEmailClienteViewModel model)
+        public async Task<IActionResult> AlterarEmailCliente([FromBody]AlterarEmailClienteViewModel model)
         {
-            await _clienteService.AlterarEmail(id, model.Email);
+            await _clienteService.AlterarEmail(UsuarioId, model.Email);
 
-            return Response(id);
+            return Response(UsuarioId);
         }
 
         // TODO: verificar a possibilidade de refatorar para HttpDelete
-        [HttpPatch("{id:guid}/cancelar")]
+        [HttpPatch("cancelar")]
         [ProducesResponseType(typeof(ResponseSuccess), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AlterarSituacaoCliente([FromRoute]Guid id, [FromBody]CancelarContaClienteViewModel model)
+        public async Task<IActionResult> AlterarSituacaoCliente([FromBody]CancelarContaClienteViewModel model)
         {
-            await _clienteService.CancelarConta(id, model.Senha);
+            await _clienteService.CancelarConta(UsuarioId, model.Senha);
 
-            return Response(id);
+            return Response(UsuarioId);
         }
     }
 }

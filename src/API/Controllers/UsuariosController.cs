@@ -3,6 +3,7 @@ using Core.Domain.Notifications;
 using CRM.Domain.Clientes.Interfaces;
 using CRM.Domain.Clientes.ValuesObjects;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Rumox.API.JwtToken;
@@ -10,6 +11,7 @@ using Rumox.API.ResponseType;
 using Rumox.API.ViewModels;
 using Rumox.API.ViewModels.Usuarios;
 using System;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Rumox.API.Controllers
@@ -39,6 +41,7 @@ namespace Rumox.API.Controllers
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(ResponseSuccess<AuthToken>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Login([FromBody]UsuarioLoginViewModel model)
@@ -60,6 +63,7 @@ namespace Rumox.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("login/{id:guid}/refresh-token")]
         [ProducesResponseType(typeof(ResponseSuccess<AuthToken>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
@@ -91,17 +95,19 @@ namespace Rumox.API.Controllers
         }
 
         [HttpPatch]
-        [Route("{id:guid}/alterar-senha")]
+        [Authorize]
+        [Route("alterar-senha")]
         [ProducesResponseType(typeof(ResponseSuccess), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> AlterarSenha([FromRoute]Guid id, [FromBody]UsuarioAlterarSenhaViewModel model)
+        public async Task<IActionResult> AlterarSenha([FromBody]UsuarioAlterarSenhaViewModel model)
         {
-            await _clienteService.AlterarSenha(id, model.SenhaAtual, model.NovaSenha);
+            await _clienteService.AlterarSenha(UsuarioId, model.SenhaAtual, model.NovaSenha);
 
-            return Response(id);
+            return Response(UsuarioId);
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("recuperar-senha")]
         [ProducesResponseType(typeof(ResponseSuccess), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
@@ -113,6 +119,7 @@ namespace Rumox.API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("alterar-senha-por-token")]
         [ProducesResponseType(typeof(ResponseSuccess), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
