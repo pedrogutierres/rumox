@@ -28,6 +28,8 @@ namespace Rumox.API.Tests.Catalogo
         {
             _testsFixture = testsFixture;
             _produtoTestsFixture = produtoTestsFixture;
+
+            _testsFixture.Client.AtribuirToken(_testsFixture.UsuarioToken);
         }
 
         [Theory(DisplayName = "Registrar produto com sucesso"), TestPriority(111)]

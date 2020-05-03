@@ -5,13 +5,14 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Schema;
 using Rumox.API.ViewModels.Clientes;
 using System;
+using System.Runtime.Serialization;
 
 namespace Rumox.API.Tests.CRM.Fixtures
 {
     public class ClienteTestsFixture : IDisposable
     {
         public readonly Faker Faker;
-        private (string, string) ClienteParaCancelarConta; // (id, senha)
+        private (string, string, string) ClienteParaCancelarConta; // (id, email, senha)
 
         public ClienteTestsFixture()
         {
@@ -56,18 +57,19 @@ namespace Rumox.API.Tests.CRM.Fixtures
                  }).Generate();
         }
 
-        public void RegistrarClienteParaCancelar(string id, string senha)
+        public void RegistrarClienteParaCancelar(string id, string email, string senha)
         {
-            ClienteParaCancelarConta = (id, senha);
+            ClienteParaCancelarConta = (id, email, senha);
         }
-        public object GerarCancelarContaClienteViewModel(out string id)
+        public object GerarCancelarContaClienteViewModel(out string id, out string email)
         {
             id = ClienteParaCancelarConta.Item1;
+            email = ClienteParaCancelarConta.Item2;
 
             return new Faker<object>("pt_BR")
                  .CustomInstantiator(f => new
                  {
-                     senha = ClienteParaCancelarConta.Item2
+                     senha = ClienteParaCancelarConta.Item3
                  }).Generate();
         }
 

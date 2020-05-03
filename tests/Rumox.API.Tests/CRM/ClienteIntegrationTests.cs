@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using FluentAssertions.Common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
@@ -51,7 +52,7 @@ namespace Rumox.API.Tests.CRM
             Assert.NotNull(result.Data.result.user);
 
             if (iteracao == 1)
-                _clienteTestsFixture.RegistrarClienteParaCancelar(result.Data.result.user.id.ToString(), "Rumox123");
+                _clienteTestsFixture.RegistrarClienteParaCancelar(result.Data.result.user.id.ToString(), result.Data.result.user.email, "Rumox123");
         }
 
         [Fact(DisplayName = "Obter clientes com sucesso"), TestPriority(22)]
@@ -61,6 +62,7 @@ namespace Rumox.API.Tests.CRM
             // Arrange
 
             // Act
+            _testsFixture.Client.AtribuirToken(_testsFixture.UsuarioToken);
             var response = await _testsFixture.Client.GetAsync("crm/clientes");
 
             // Assert
@@ -81,6 +83,7 @@ namespace Rumox.API.Tests.CRM
             var clienteRegistrado = await ObterClienteRegistrada();
 
             // Act
+            _testsFixture.Client.AtribuirToken(_testsFixture.UsuarioToken);
             var response = await _testsFixture.Client.GetAsync($"crm/clientes/{clienteRegistrado.Id}");
 
             // Assert
@@ -99,6 +102,7 @@ namespace Rumox.API.Tests.CRM
             var clienteRegistrado = await ObterClienteRegistrada();
 
             // Act
+            _testsFixture.Client.AtribuirToken(_testsFixture.UsuarioToken);
             var response = await _testsFixture.Client.GetAsync($"crm/clientes/cpf/{clienteRegistrado.CPF}");
 
             // Assert
@@ -114,11 +118,11 @@ namespace Rumox.API.Tests.CRM
         public async Task Cliente_AtualizarCliente_Sucesso()
         {
             // Arrange
-            var clienteRegistrado = await ObterClienteRegistrada();
             var cliente = _clienteTestsFixture.GerarAtualizarClienteViewModel();
 
             // Act
-            var response = await _testsFixture.Client.PutAsJsonAsync($"crm/clientes/{clienteRegistrado.Id}", cliente);
+            _testsFixture.Client.AtribuirToken(_testsFixture.UsuarioToken);
+            var response = await _testsFixture.Client.PutAsJsonAsync($"crm/clientes", cliente);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -134,11 +138,11 @@ namespace Rumox.API.Tests.CRM
         public async Task Cliente_AlterarEmailCliente_Sucesso()
         {
             // Arrange
-            var clienteRegistrado = await ObterClienteRegistrada(SituacaoQueryModel.Ativo);
             var cliente = new { email = _clienteTestsFixture.Faker.Person.Email };
 
             // Act
-            var response = await _testsFixture.Client.PatchAsJsonAsync($"crm/clientes/{clienteRegistrado.Id}/email", cliente);
+            _testsFixture.Client.AtribuirToken(_testsFixture.UsuarioToken);
+            var response = await _testsFixture.Client.PatchAsJsonAsync($"crm/clientes/email", cliente);
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -147,6 +151,8 @@ namespace Rumox.API.Tests.CRM
 
             Assert.NotNull(result);
             Assert.NotNull(result.Id);
+
+            _testsFixture.AtualizarDadosUsuarioLogado(email: cliente.email);
         }
 
         [Fact(DisplayName = "Cancelar conta do cliente com sucesso"), TestPriority(27)]
@@ -154,10 +160,16 @@ namespace Rumox.API.Tests.CRM
         public async Task Cliente_CancelarContaCliente_Sucesso()
         {
             // Arrange
-            var cliente = _clienteTestsFixture.GerarCancelarContaClienteViewModel(out var id);
+            var cliente = _clienteTestsFixture.GerarCancelarContaClienteViewModel(out var _, out var email);
+
+            var usuarioLogin = new { email, ((dynamic)cliente).senha };
+            var responseLogin = _testsFixture.Client.PostAsJsonAsync("usuarios/login", usuarioLogin).Result;
+            var resultLogin = JsonConvert.DeserializeObject<ResponseSuccess<AuthToken>>(responseLogin.Content.ReadAsStringAsync().Result);
+            Assert.NotNull(resultLogin?.Data?.result);
 
             // Act
-            var response = await _testsFixture.Client.PatchAsJsonAsync($"crm/clientes/{id}/cancelar", cliente);
+            _testsFixture.Client.AtribuirToken(resultLogin.Data.result.access_token);
+            var response = await _testsFixture.Client.PatchAsJsonAsync($"crm/clientes/cancelar", cliente);
 
             // Assert
             response.EnsureSuccessStatusCode();

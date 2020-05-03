@@ -25,6 +25,8 @@ namespace Rumox.API.Tests.Catalogo
         {
             _testsFixture = testsFixture;
             _categoriaTestsFixture = categoriaTestsFixture;
+
+            _testsFixture.Client.AtribuirToken(_testsFixture.UsuarioToken);
         }
 
         [Theory(DisplayName = "Registrar categoria com sucesso"), TestPriority(101)]

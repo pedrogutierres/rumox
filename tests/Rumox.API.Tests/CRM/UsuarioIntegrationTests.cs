@@ -62,7 +62,8 @@ namespace Rumox.API.Tests.CRM
             var data = new { senhaAtual = _testsFixture.UsuarioLogado.Senha, novaSenha = "SenhaAlterada@2020#" };
 
             // Act
-            var response = await _testsFixture.Client.PatchAsJsonAsync($"usuarios/{_testsFixture.UsuarioLogado.Id}/alterar-senha", data);
+            _testsFixture.Client.AtribuirToken(_testsFixture.UsuarioToken);
+            var response = await _testsFixture.Client.PatchAsJsonAsync($"usuarios/alterar-senha", data);
 
             // Assert
             response.EnsureSuccessStatusCode();

@@ -20,5 +20,11 @@ namespace Rumox.API.Tests.Config
             RefreshToken = refreshToken;
             Senha = senha;
         }
+
+        public void AtualizarDados(string email, string senha)
+        {
+            Email = email;
+            Senha = senha;
+        }
     }
 }

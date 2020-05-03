@@ -85,6 +85,14 @@ namespace Rumox.API.Tests.Config
             CRM = new MongoSetup(configuration);
         }
 
+        public void AtualizarDadosUsuarioLogado(string email = null, string senha = null)
+        {
+            if (usuarioLogado == null)
+                return;
+
+            usuarioLogado.AtualizarDados(email ?? usuarioLogado.Email, senha ?? usuarioLogado.Senha);
+        }
+
         public void Dispose()
         {
             Client.Dispose();
