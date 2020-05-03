@@ -30,7 +30,7 @@ namespace Rumox.API.Tests.Catalogo
             _produtoTestsFixture = produtoTestsFixture;
         }
 
-        [Theory(DisplayName = "Registrar produto com sucesso"), TestPriority(11)]
+        [Theory(DisplayName = "Registrar produto com sucesso"), TestPriority(111)]
         [Trait("Produto", "Integração")]
         [Repeat(10)]
         public async Task Produto_RegistrarProduto_Sucesso(int iteracao)
@@ -50,7 +50,7 @@ namespace Rumox.API.Tests.Catalogo
             Assert.NotNull(result.Id);
         }
 
-        [Fact(DisplayName = "Obter produtos com sucesso"), TestPriority(12)]
+        [Fact(DisplayName = "Obter produtos com sucesso"), TestPriority(112)]
         [Trait("Produto", "Integração")]
         public async Task Produto_ObterTodas_RetornarComSucesso()
         {
@@ -68,8 +68,7 @@ namespace Rumox.API.Tests.Catalogo
             result.Should().HaveCountGreaterThan(0);
         }
 
-
-        [Fact(DisplayName = "Obter produto por id"), TestPriority(13)]
+        [Fact(DisplayName = "Obter produto por id"), TestPriority(113)]
         [Trait("Produto", "Integração")]
         public async Task Produto_ObterPorId_RetornarComSucesso()
         {
@@ -87,7 +86,7 @@ namespace Rumox.API.Tests.Catalogo
             Assert.True(produto.IsValid(_produtoTestsFixture.ObterSchemaProdutoViewModel()));
         }
 
-        [Fact(DisplayName = "Atualizar produto com sucesso"), TestPriority(14)]
+        [Fact(DisplayName = "Atualizar produto com sucesso"), TestPriority(114)]
         [Trait("Produto", "Integração")]
         public async Task Produto_AtualizarProduto_Sucesso()
         {
@@ -107,7 +106,7 @@ namespace Rumox.API.Tests.Catalogo
             Assert.NotNull(result.Id);
         }
 
-        [Fact(DisplayName = "Inativar produto com sucesso"), TestPriority(15)]
+        [Fact(DisplayName = "Inativar produto com sucesso"), TestPriority(115)]
         [Trait("Produto", "Integração")]
         public async Task Produto_IntivarProduto_Sucesso()
         {
@@ -127,7 +126,7 @@ namespace Rumox.API.Tests.Catalogo
             Assert.NotNull(result.Id);
         }
 
-        [Fact(DisplayName = "Ativar produto com sucesso"), TestPriority(16)]
+        [Fact(DisplayName = "Ativar produto com sucesso"), TestPriority(116)]
         [Trait("Produto", "Integração")]
         public async Task Produto_AtivarProduto_Sucesso()
         {

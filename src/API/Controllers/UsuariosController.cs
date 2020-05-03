@@ -90,7 +90,7 @@ namespace Rumox.API.Controllers
             return Response(await _jwtTokenGenerate.GerarToken(cliente));
         }
 
-        [HttpPost]
+        [HttpPatch]
         [Route("{id:guid}/alterar-senha")]
         [ProducesResponseType(typeof(ResponseSuccess), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]

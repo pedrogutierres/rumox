@@ -27,7 +27,7 @@ namespace Rumox.API.Tests.Catalogo
             _categoriaTestsFixture = categoriaTestsFixture;
         }
 
-        [Theory(DisplayName = "Registrar categoria com sucesso"), TestPriority(1)]
+        [Theory(DisplayName = "Registrar categoria com sucesso"), TestPriority(101)]
         [Trait("Categoria", "Integração")]
         [Repeat(10)]
         public async Task Categoria_RegistrarCategoria_Sucesso(int iteracao)
@@ -47,7 +47,7 @@ namespace Rumox.API.Tests.Catalogo
             Assert.NotNull(result.Id);
         }
 
-        [Fact(DisplayName = "Obter categorias com sucesso"), TestPriority(2)]
+        [Fact(DisplayName = "Obter categorias com sucesso"), TestPriority(102)]
         [Trait("Categoria", "Integração")]
         public async Task Categoria_ObterTodas_RetornarComSucesso()
         {
@@ -66,7 +66,7 @@ namespace Rumox.API.Tests.Catalogo
         }
 
 
-        [Fact(DisplayName = "Obter categoria por id"), TestPriority(3)]
+        [Fact(DisplayName = "Obter categoria por id"), TestPriority(103)]
         [Trait("Categoria", "Integração")]
         public async Task Categoria_ObterPorId_RetornarComSucesso()
         {
@@ -84,7 +84,7 @@ namespace Rumox.API.Tests.Catalogo
             Assert.True(categoria.IsValid(_categoriaTestsFixture.ObterSchemaCategoriaViewModel()));
         }
 
-        [Fact(DisplayName = "Atualizar categoria com sucesso"), TestPriority(4)]
+        [Fact(DisplayName = "Atualizar categoria com sucesso"), TestPriority(104)]
         [Trait("Categoria", "Integração")]
         public async Task Categoria_AtualizarCategoria_Sucesso()
         {
@@ -105,7 +105,7 @@ namespace Rumox.API.Tests.Catalogo
         }
 
 
-        [Fact(DisplayName = "Deletar categoria com sucesso"), TestPriority(5)]
+        [Fact(DisplayName = "Deletar categoria com sucesso"), TestPriority(105)]
         [Trait("Categoria", "Integração")]
         public async Task Categoria_InativarCategoria_Sucesso()
         {

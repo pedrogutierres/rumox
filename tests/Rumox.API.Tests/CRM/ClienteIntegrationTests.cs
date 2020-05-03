@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
+using Rumox.API.JwtToken;
 using Rumox.API.ResponseType;
 using Rumox.API.Tests.Config;
 using Rumox.API.Tests.CRM.Fixtures;
@@ -44,13 +45,13 @@ namespace Rumox.API.Tests.CRM
             // Assert
             response.EnsureSuccessStatusCode();
 
-            var result = JsonConvert.DeserializeObject<ResponseSuccess<string>>(await response.Content.ReadAsStringAsync());
+            var result = JsonConvert.DeserializeObject<ResponseSuccess<AuthToken>>(await response.Content.ReadAsStringAsync());
 
             Assert.NotNull(result);
-            Assert.NotNull(result.Id);
+            Assert.NotNull(result.Data.result.user);
 
             if (iteracao == 1)
-                _clienteTestsFixture.RegistrarClienteParaCancelar(result.Id.ToString(), "Rumox123");
+                _clienteTestsFixture.RegistrarClienteParaCancelar(result.Data.result.user.id.ToString(), "Rumox123");
         }
 
         [Fact(DisplayName = "Obter clientes com sucesso"), TestPriority(22)]

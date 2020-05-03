@@ -11,7 +11,7 @@ namespace Rumox.API.Tests.CRM.Fixtures
     public class ClienteTestsFixture : IDisposable
     {
         public readonly Faker Faker;
-        private (string, string) ClienteParaCancelarConta;
+        private (string, string) ClienteParaCancelarConta; // (id, senha)
 
         public ClienteTestsFixture()
         {

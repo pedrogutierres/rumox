@@ -8,6 +8,7 @@ using CRM.Domain.Clientes.ValuesObjects;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Rumox.API.JwtToken;
 using Rumox.API.ResponseType;
 using Rumox.API.ViewModels.Clientes;
 using Rumox.API.ViewModelsGlobal;
@@ -24,11 +25,13 @@ namespace Rumox.API.Controllers
         private readonly IMapper _mapper;
         private readonly IClienteService _clienteService;
         private readonly IClienteRepository _clienteRepository;
+        private readonly JwtTokenGenerate _jwtTokenGenerate;
 
         public ClientesController(
             IMapper mapper,
             IClienteService clienteService,
             IClienteRepository clienteRepository,
+            JwtTokenGenerate jwtTokenGenerate,
             INotificationHandler<DomainNotification> notifications,
             IUser user,
             IMediatorHandler mediator)
@@ -37,6 +40,7 @@ namespace Rumox.API.Controllers
             _mapper = mapper;
             _clienteService = clienteService;
             _clienteRepository = clienteRepository;
+            _jwtTokenGenerate = jwtTokenGenerate;
         }
 
         [HttpGet]
@@ -79,7 +83,7 @@ namespace Rumox.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseSuccess), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseSuccess<AuthToken>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RegistrarCliente([FromBody]RegistrarClienteViewModel model)
         {
@@ -89,7 +93,10 @@ namespace Rumox.API.Controllers
 
             await _clienteService.Registrar(cliente);
 
-            return Response(cliente.Id);
+            if (!OperacaoValida())
+                return BadRequest();
+
+            return Response(await _jwtTokenGenerate.GerarToken(cliente));
         }
 
         [HttpPut("{id:guid}")]
