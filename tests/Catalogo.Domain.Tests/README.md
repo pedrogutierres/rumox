@@ -5,7 +5,7 @@
 - FluentAssertions
 - Moq
 
-## Decisões técnicas
-- Os testes de serviços são mockados através do Moqs
-- As validações de entitades não são ainda testadas pelo projeto, mas tem seu teste garantido pelos testes do próprio framework (FluentAssetion)
-- Repositories não são testados pois o mesmo ocorre no teste de integração
+## DecisÃµes tÃ©cnicas
+- Os testes de serviÃ§os sÃ£o mockados atravÃ©s do Moq
+- As validaÃ§Ãµes de entitades nÃ£o sÃ£o ainda testadas pelo projeto, mas tem seu teste garantido pelos testes do prÃ³prio framework (FluentAssetion)
+- RepositÃ³rios de dados (Infra) nÃ£o sÃ£o testados pois o mesmo ocorre no teste de integraÃ§Ã£o
