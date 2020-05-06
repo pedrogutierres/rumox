@@ -1,5 +1,5 @@
 
-## Frameworks
+## Bibliotecas
 - AutoMapper
 - Swagger
 

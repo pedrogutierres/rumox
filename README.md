@@ -14,7 +14,7 @@ No momento atual está implementado alguns padrões, técnicas e modelagem segui
 - Design Patterns
 - Domain Notifications
 
-Também utiliza algunas frameworks como:
+Também utiliza algumas bibliotecas como:
 
 - Swagger *(para documentação da API)*
 - JWT *(para autenticação de usuários)*
@@ -32,7 +32,7 @@ Os bancos de dados utilizados:
 - MySQL
 - Redis *(para serviços de cache)*
 
-Frameworks utilizadas nos testes:
+Ferramentas e bibliotecas utilizadas nos testes:
 
 - xUnit
 - Bogus
@@ -53,7 +53,7 @@ Atualmente o docker está implementado apenas para levantar o ambiente de testes
 
 ## Futuro
 
-Segue alguns frameworks, padrões, tecnologias e outros serviços, que possívelmente serão adotados:
+Segue alguns frameworks, bibliotecas, padrões, tecnologias e outros serviços, que possívelmente serão adotados:
 
 - CQRS
 - ELK (Logs)

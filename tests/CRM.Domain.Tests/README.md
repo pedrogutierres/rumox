@@ -1,5 +1,5 @@
 
-## Frameworks
+## Bibliotecas
 - xUnit
 - Bogus
 - FluentAssertions

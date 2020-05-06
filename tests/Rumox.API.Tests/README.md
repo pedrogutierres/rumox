@@ -1,25 +1,25 @@
 
-## Frameworks
+## Bibliotecas
 - xUnit
 - Bogus
 - FluentAssertions
 - Moq
 
 ## Como usar
-Para executar os testes de integraÁ„o da API deve ser inicializado a infraestutura como banco de dados pelo docker-compose de test.
-- *OpÁ„o 1*: executar diretamente o arquivo build-test.sh atraves de um terminal sh
-- *OpÁ„o 2*: pode ser executado o seguinte comando para levantar o docker-compose de teste, na pasta raiz da soluÁ„o:
+Para executar os testes de integra√ß√£o da API deve ser inicializado a infraestutura como banco de dados pelo docker-compose de test.
+- *Op√ß√£o 1*: executar diretamente o arquivo build-test.sh atraves de um terminal sh
+- *Op√ß√£o 2*: pode ser executado o seguinte comando para levantar o docker-compose de teste, na pasta raiz da solu√ß√£o:
 ```
 docker-compose -f docker-compose.yml -f docker-compose.test.yml up -d
 ```
 
-## Decisıes tÈcnicas
-- O(s) banco de dado(s) s„o resetados em todo nova inicializaÁ„o de teste, de acordo com seu contexto
-- O teste de integraÁ„o por agora executa apenas testes que retornar„o sucesso na execuÁ„o
-- Testes para criar novos registros executam uma repetiÁ„o de 10x, realizando assim 10 vezes o mesmo teste para que se crie 10 registros
-- Os testes mantÈm em geral uma ordem, pois algumas entidades dependem de outras, exemplo: para registrar um produto precisa-se previamente de categorias registradas, sendo assim, È recomendado executar todos os testes de integraÁ„o em conjunto
-- Ao tentar obter um token de usu·rio sempre ir· cadastrar o usu·rio caso o mesmo n„o esteja ainda cadastrado
-- O teste de login ir· apenas validar se o login foi realizado com sucesso ao tentar obter um UsuarioLogado ou UsuarioToken da fixture de IntegraÁ„o
+## Decis√µes t√©cnicas
+- O(s) banco de dado(s) s√£o resetados em todo nova inicializa√ß√£o de teste, de acordo com seu contexto
+- O teste de integra√ß√£o por agora executa apenas testes que retornar√£o sucesso na execu√ß√£o
+- Testes para criar novos registros executam uma repeti√ß√£o de 10x, realizando assim 10 vezes o mesmo teste para que se crie 10 registros
+- Os testes mant√©m em geral uma ordem, pois algumas entidades dependem de outras, exemplo: para registrar um produto precisa-se previamente de categorias registradas, sendo assim, √© recomendado executar todos os testes de integra√ß√£o em conjunto
+- Ao tentar obter um token de usu√°rio sempre ir√° cadastrar o usu√°rio caso o mesmo n√£o esteja ainda cadastrado
+- O teste de login ir√° apenas validar se o login foi realizado com sucesso ao tentar obter um UsuarioLogado ou UsuarioToken da fixture de Integra√ß√£o
 
-### DÈbitos tÈcnicos
+### D√©bitos t√©cnicos
 - Refatorar funcionalidade que realiza a limpeza dos dados antes de inicializar os testes

@@ -1,5 +1,5 @@
 
-## Frameworks
+## Bibliotecas
 - Entity Framework Core
 - Pomelo MySQL
 
