@@ -37,7 +37,7 @@ namespace Rumox.API.Configurations
 
                     ValidateIssuerSigningKey = true,
                     ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero // .FromMinutes(10)
+                    ClockSkew = TimeSpan.FromMinutes(10) // Considerar possível diferença de data e hora entre servidores
                 };
             });
 
