@@ -1,12 +1,17 @@
 ﻿using Core.Domain.Extensions;
+using Core.Infra.Mongo;
+using Core.Infra.MySQL;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using Rumox.API.Extensions;
 using Rumox.API.ResponseType;
 using System;
 using System.Linq;
@@ -60,6 +65,13 @@ namespace Rumox.API.Configurations
 
             services.AddGzipCompression();
 
+            services.AddHealthChecks()
+                .AddMySql(configuration.GetMySQLDbConnectionString(), name: "MySQL")
+                .AddRedis(configuration.GetRedisConnectionString(), name: "Redis")
+                .AddMongoDb(configuration.GetMongoDbConnectionString(), name: "MongoDB");
+
+            services.AddHealthChecksUI();
+
             return services;
         }
 
@@ -94,6 +106,20 @@ namespace Rumox.API.Configurations
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/api/status", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+                endpoints.MapHealthChecksUI(options =>
+                {
+                    options.UIPath = "/api/healthchecks-ui";
+                    options.ResourcesPath = "/api/healthchecks-ui-resources";
+
+                    options.UseRelativeApiPath = false;
+                    options.UseRelativeResourcesPath = false;
+                    options.UseRelativeWebhookPath = false;
+                });
             });
 
             return app;

@@ -3,6 +3,12 @@
 - AutoMapper
 - Swagger
 
+### Url
+Por padrão deverá ser utilizado a url sem HTTPS pois a segurança deveria estar na fronteira da aplicação
+Url: http://localhost:5000
+Url Swagger: http://localhost:5000/swagger
+Url HealthCheck UI: http://localhost:5000/api/healthchecks-ui
+
 ## Decisões técnicas
 - ViewModels para registrar nova entidade terá seu ID criado internamente
 - A ModelState será validada pelo próprio middleware do ASP.NET Core porém teve seu retorno modificado para manter o padrão da aplicação *(localizado no arquivo ControllersConfiguration.cs)*
