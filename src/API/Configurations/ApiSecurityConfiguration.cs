@@ -8,9 +8,9 @@ using System;
 
 namespace Rumox.API.Configurations
 {
-    public static class MvcSecurityConfiguration
+    public static class ApiSecurityConfiguration
     {
-        public static void AddMvcSecurity(this IServiceCollection services, IConfiguration configuration)
+        public static void AddApiSecurity(this IServiceCollection services, IConfiguration configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
@@ -37,7 +37,7 @@ namespace Rumox.API.Configurations
 
                     ValidateIssuerSigningKey = true,
                     ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero
+                    ClockSkew = TimeSpan.Zero // .FromMinutes(10)
                 };
             });
 

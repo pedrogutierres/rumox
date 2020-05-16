@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 
@@ -8,9 +10,11 @@ namespace Rumox.API.Configurations
     {
         public static void AddSwaggerConfig(this IServiceCollection services)
         {
+            if (services == null) throw new ArgumentNullException(nameof(services));
+
             services.AddSwaggerGen(s =>
             {
-                s.SwaggerDoc("v1", new OpenApiInfo
+                s.SwaggerDoc("doc", new OpenApiInfo
                 {
                     Version = "v1",
                     Title = "Rumox API",
@@ -56,6 +60,21 @@ namespace Rumox.API.Configurations
 
                 s.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
             });
+        }
+
+        public static IApplicationBuilder UseSwaggerConfig(this IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
+        {
+            app.UseSwagger();
+
+            if (!env.IsProduction())
+            {
+                app.UseSwaggerUI(s =>
+                {
+                    s.SwaggerEndpoint("/swagger/doc/swagger.json", "Rumox API");
+                });
+            }
+
+            return app;
         }
     }
 }

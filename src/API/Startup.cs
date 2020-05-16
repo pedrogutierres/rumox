@@ -25,10 +25,9 @@ namespace Rumox.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-            services.AddConrollersConfiguration();
+            services.AddApiConfig(Configuration);
 
-            services.AddMvcSecurity(Configuration);
+            services.AddApiSecurity(Configuration);
 
             services.AddCacheConfiguration(Configuration);
 
@@ -44,42 +43,9 @@ namespace Rumox.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseExceptionHandler(errorApp =>
-            {
-                errorApp.Run(async context =>
-                {
-                    var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerFeature>();
+            app.UseApiConfig(env);
 
-                    if (exceptionHandlerPathFeature != null)
-                    {
-                        context.Response.StatusCode = 500;
-                        context.Response.ContentType = "application/json";
-                        await context.Response.WriteAsync(JsonConvert.SerializeObject(new { error = exceptionHandlerPathFeature.Error?.AgruparTodasAsMensagens() }));
-                    }
-                });
-            });
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(s =>
-            {
-                s.SwaggerEndpoint("/swagger/v1/swagger.json", "Rumox API v1.0");
-            });
-
-            app.UseRouting();
-
-            app.UseCors(cors => cors
-               .AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader());
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseSwaggerConfig(env);
         }
     }
 }

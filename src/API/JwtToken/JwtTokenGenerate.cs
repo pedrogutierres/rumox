@@ -60,7 +60,7 @@ namespace Rumox.API.JwtToken
                 Audience = _tokenDescriptor.Audience,
                 SigningCredentials = signingConf.SigningCredentials,
                 Subject = identityClaims,
-                NotBefore = DateTime.UtcNow.AddMinutes(-15), // Considerar possível diferença de data e hora entre servidores
+                NotBefore = DateTime.UtcNow, // Considerar possível diferença de data e hora entre servidores
                 Expires = dataExpiracao
             };
 
