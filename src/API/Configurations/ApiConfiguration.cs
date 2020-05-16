@@ -58,6 +58,8 @@ namespace Rumox.API.Configurations
                         .AllowAnyHeader());
             });
 
+            services.AddGzipCompression();
+
             return services;
         }
 
@@ -81,6 +83,8 @@ namespace Rumox.API.Configurations
             app.UseRouting();
 
             app.UseCors(env.EnvironmentName);
+
+            app.UseResponseCompression();
 
             app.UseAuthentication();
             app.UseAuthorization();
