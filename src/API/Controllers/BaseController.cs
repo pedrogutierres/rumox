@@ -2,6 +2,7 @@
 using Core.Domain.Notifications;
 using FluentValidation.Results;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Rumox.API.ResponseType;
@@ -45,18 +46,32 @@ namespace Rumox.API.Controllers
                 });
             }
 
-            return BadRequest(new ResponseError
+            return new BadRequestObjectResult(
+                new ResponseError(
+                    "Erros de negócio",
+                    "Erros nas regras de negócio encontradas",
+                    StatusCodes.Status400BadRequest,
+                    HttpContext.Request.Path,
+                   _notifications.GetNotifications()
+                ))
             {
-                Errors = _notifications.GetNotifications().Select(p => p.Value)
-            });
+                ContentTypes = { "application/problem+json" }
+            };
         }
 
         protected new ActionResult BadRequest()
         {
-            return BadRequest(new ResponseError
+            return new BadRequestObjectResult(
+                 new ResponseError(
+                     "Erros de negócio",
+                     "Erros nas regras de negócio encontradas",
+                     StatusCodes.Status400BadRequest,
+                     HttpContext.Request.Path,
+                     _notifications.GetNotifications()
+                 ))
             {
-                Errors = _notifications.GetNotifications().Select(p => p.Value)
-            });
+                ContentTypes = { "application/problem+json" }
+            };
         }
 
         protected PaginacaoViewModel<T> Paginacao<T>(IEnumerable<T> itens, int totalItens)
@@ -64,35 +79,9 @@ namespace Rumox.API.Controllers
             return PaginacaoViewModel<T>.NovaPaginacao(itens, totalItens);
         }
 
-        protected bool ValidarModelState()
-        {
-            if (!ModelState.IsValid)
-            {
-                NotificarErroModelInvalida();
-                return false;
-            }
-            return true;
-        }
-
         protected bool OperacaoValida()
         {
             return (!_notifications.HasNotifications());
-        }
-
-        protected void NotificarErroModelInvalida()
-        {
-            var erros = ModelState.Values.SelectMany(p => p.Errors);
-            foreach (var erro in erros)
-            {
-                var erroMsg = erro.Exception == null ? erro.ErrorMessage : erro.Exception.Message;
-                NotificarErro(string.Empty, erroMsg);
-            }
-        }
-
-        protected void AddicionarErrosIdentity(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-                NotificarErro(result.ToString(), error.Description);
         }
 
         protected void NotificarValidacoesErro(ValidationResult validationResult)

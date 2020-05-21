@@ -1,20 +1,19 @@
-﻿using Core.Domain.Extensions;
-using Core.Infra.Mongo;
+﻿using Core.Infra.Mongo;
 using Core.Infra.MySQL;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 using Rumox.API.Extensions;
+using Rumox.API.Middlewares;
 using Rumox.API.ResponseType;
 using System;
-using System.Linq;
+using System.Text.Json;
 
 namespace Rumox.API.Configurations
 {
@@ -28,40 +27,19 @@ namespace Rumox.API.Configurations
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.IgnoreNullValues = true;
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                    options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
                 })
                 .ConfigureApiBehaviorOptions(options =>
                 {
                     options.InvalidModelStateResponseFactory =
-                        (context => new BadRequestObjectResult(new ResponseError
+                        (context => new BadRequestObjectResult(new ResponseError("Erros de validações encontrados", "Erros nas validações da model enviada", StatusCodes.Status400BadRequest, context.HttpContext.Request.Path, context.ModelState))
                         {
-                            Errors = context.ModelState.Values.SelectMany(p => p.Errors).Select(erro => erro.Exception?.Message ?? erro.ErrorMessage)
-                        }));
+                            ContentTypes = { "application/problem+json" }
+                        });
                 });
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("Development",
-                    builder =>
-                        builder
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
-
-                options.AddPolicy("Testing",
-                    builder =>
-                        builder
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
-
-                options.AddPolicy("Production",
-                    builder =>
-                        builder
-                        .WithOrigins(configuration["AllowedHosts"].Split(','))
-                        .SetIsOriginAllowedToAllowWildcardSubdomains()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
-            });
+            services.AddCorsConfiguration(configuration);
 
             services.AddGzipCompression();
 
@@ -75,22 +53,9 @@ namespace Rumox.API.Configurations
             return services;
         }
 
-        public static IApplicationBuilder UseApiConfig(this IApplicationBuilder app, IWebHostEnvironment env)
+        public static IApplicationBuilder UseApiConfig(this IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseExceptionHandler(errorApp =>
-            {
-                errorApp.Run(async context =>
-                {
-                    var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerFeature>();
-
-                    if (exceptionHandlerPathFeature != null)
-                    {
-                        context.Response.StatusCode = 500;
-                        context.Response.ContentType = "application/json";
-                        await context.Response.WriteAsync(JsonConvert.SerializeObject(new { error = exceptionHandlerPathFeature.Error?.AgruparTodasAsMensagens() }));
-                    }
-                });
-            });
+            app.ConfigureExceptionHandler(loggerFactory);
 
             app.UseRouting();
 

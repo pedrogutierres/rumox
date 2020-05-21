@@ -1,12 +1,9 @@
-using Core.Domain.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 using Rumox.API.Configurations;
 using Rumox.API.Extensions;
 
@@ -46,9 +43,9 @@ namespace Rumox.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseApiConfig(env);
+            app.UseApiConfig(env, loggerFactory);
         }
     }
 }
