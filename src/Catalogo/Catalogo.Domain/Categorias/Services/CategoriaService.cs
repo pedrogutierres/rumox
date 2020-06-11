@@ -43,7 +43,7 @@ namespace Catalogo.Domain.Categorias.Services
 
             await _categoriaRepository.Registrar(categoria);
 
-            if (!Commit())
+            if (!await Commit())
                 return;
 
             await _mediator.RaiseEvent(CategoriaAdapter.ToCategoriaRegistradaEvent(categoria));
@@ -63,7 +63,7 @@ namespace Catalogo.Domain.Categorias.Services
 
             await _categoriaRepository.Atualizar(categoria);
 
-            if (!Commit())
+            if (!await Commit())
                 return;
 
             await _mediator.RaiseEvent(CategoriaAdapter.ToCategoriaAtualizadaEvent(categoria));
@@ -83,7 +83,7 @@ namespace Catalogo.Domain.Categorias.Services
 
             await _categoriaRepository.Deletar(id);
 
-            if (!Commit())
+            if (!await Commit())
                 return;
 
             await _mediator.RaiseEvent(CategoriaAdapter.ToCategoriaDeletadaEvent(categoria));

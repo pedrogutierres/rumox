@@ -33,7 +33,7 @@ namespace Rumox.API.JwtToken
 
         public async Task<AuthToken> GerarToken(Cliente cliente)
         {
-            return await GerarToken(new UsuarioCliente(cliente.Id, $"{cliente.Nome} {cliente.Sobrenome}", cliente.Email), DateTime.Now.AddMinutes(_tokenDescriptor.MinutesValid));
+            return await GerarToken(new UsuarioCliente(cliente.Id, $"{cliente.Nome} {cliente.Sobrenome}", cliente.Email), DateTime.UtcNow.AddMinutes(_tokenDescriptor.MinutesValid));
         }
 
         private async Task<AuthToken> GerarToken(UsuarioBase usuario, DateTime dataExpiracao)

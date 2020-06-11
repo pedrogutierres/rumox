@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Core.Infra.MySQL
 {
@@ -25,10 +27,10 @@ namespace Core.Infra.MySQL
             optionsBuilder.UseMySql(_configuration.GetMySQLDbConnectionString());
         }
 
-        public override int SaveChanges()
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries().Where(p => p.Entity.GetType().GetProperty("DataHoraCriacao") != null
-                                                                  || p.Entity.GetType().GetProperty("DataHoraAlteracao") != null))
+                                                                 || p.Entity.GetType().GetProperty("DataHoraAlteracao") != null))
             {
                 if (entry.Properties.Any(p => p.Metadata.Name == "DataHoraCriacao"))
                 {
@@ -52,7 +54,7 @@ namespace Core.Infra.MySQL
                 }
             }
 
-            return base.SaveChanges();
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }

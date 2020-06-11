@@ -4,6 +4,7 @@ using Core.Domain.Notifications;
 using FluentValidation.Results;
 using MediatR;
 using System;
+using System.Threading.Tasks;
 
 namespace Core.Domain.Services
 {
@@ -38,12 +39,12 @@ namespace Core.Domain.Services
             return _notifications.HasNotifications();
         }
 
-        protected bool Commit()
+        protected async Task<bool> Commit()
         {
             if (HasNotifications()) return false;
             try
             {
-                if (_uow.Commit())
+                if (await _uow.Commit())
                     return true;
             }
             catch (Exception ex)

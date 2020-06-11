@@ -1,5 +1,6 @@
 ﻿using CRM.Domain.Interfaces;
 using CRM.Infra.Data.Mongo.Context;
+using System.Threading.Tasks;
 
 namespace CRM.Infra.Data.Mongo.UoW
 {
@@ -12,9 +13,9 @@ namespace CRM.Infra.Data.Mongo.UoW
             _context = context;
         }
 
-        public bool Commit()
+        public Task<bool> Commit()
         {
-            return true;
+            return Task.FromResult(true);
         }
 
         public void Dispose()

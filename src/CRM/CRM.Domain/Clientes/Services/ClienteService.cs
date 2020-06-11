@@ -41,7 +41,7 @@ namespace CRM.Domain.Clientes.Services
 
             await _clienteRepository.Registrar(cliente);
 
-            if (!Commit())
+            if (!await Commit())
                 return;
 
             await _mediator.RaiseEvent(ClienteAdapter.ToClienteRegistradoEvent(cliente));
@@ -61,7 +61,7 @@ namespace CRM.Domain.Clientes.Services
 
             await _clienteRepository.Atualizar(cliente);
 
-            if (!Commit())
+            if (!await Commit())
                 return;
 
             await _mediator.RaiseEvent(ClienteAdapter.ToClienteAtualizadoEvent(cliente));
@@ -86,7 +86,7 @@ namespace CRM.Domain.Clientes.Services
 
             await _clienteRepository.Atualizar(cliente);
 
-            if (!Commit())
+            if (!await Commit())
                 return;
 
             await _mediator.RaiseEvent(ClienteAdapter.ToClienteEmailAlteradoEvent(cliente));
@@ -120,7 +120,7 @@ namespace CRM.Domain.Clientes.Services
 
             await _clienteRepository.Atualizar(cliente);
 
-            if (!Commit())
+            if (!await Commit())
                 return;
 
             await _mediator.RaiseEvent(new ClienteSenhaAlteradaEvent(cliente.Id));
@@ -141,7 +141,7 @@ namespace CRM.Domain.Clientes.Services
 
             await _clienteRepository.Atualizar(cliente);
 
-            if (!Commit())
+            if (!await Commit())
                 return;
 
             await _mediator.RaiseEvent(ClienteAdapter.ToClienteContaCanceladaEvent(cliente));

@@ -1,5 +1,6 @@
 ﻿using Catalogo.Domain.Interfaces;
 using Catalogo.Infra.Data.MySQL.Context;
+using System.Threading.Tasks;
 
 namespace Catalogo.Infra.Data.MySQL.UoW
 {
@@ -12,9 +13,9 @@ namespace Catalogo.Infra.Data.MySQL.UoW
             _context = context;
         }
 
-        public bool Commit()
+        public async Task<bool> Commit()
         {
-            return _context.SaveChanges() > 0;
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public void Dispose()

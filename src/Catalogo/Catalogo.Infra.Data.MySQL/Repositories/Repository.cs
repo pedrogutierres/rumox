@@ -52,11 +52,6 @@ namespace Catalogo.Infra.Data.MySQL.Repositories
             return DbSet.AsNoTracking().AnyAsync(t => t.Id == id);
         }
 
-        public int SaveChanges()
-        {
-            return Db.SaveChanges();
-        }
-
         public void Dispose()
         {
             Db.Dispose();

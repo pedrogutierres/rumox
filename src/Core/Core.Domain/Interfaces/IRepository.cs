@@ -15,6 +15,5 @@ namespace Core.Domain.Interfaces
         Task<TEntity> ObterPorId(Guid id);
         Task<bool> ExistePorId(Guid id);
         IQueryable<TEntity> Buscar(Expression<Func<TEntity, bool>> predicate);
-        int SaveChanges();
     }
 }

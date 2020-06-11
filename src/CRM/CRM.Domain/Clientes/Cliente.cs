@@ -56,7 +56,7 @@ namespace CRM.Domain.Clientes
 
         private void NotificarAlteracao()
         {
-            DataHoraAlteracao = DateTime.Now;
+            DataHoraAlteracao = DateTime.UtcNow;
         }
 
         public override bool EhValido()

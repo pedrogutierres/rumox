@@ -39,7 +39,7 @@ namespace Catalogo.Domain.Produtos.Services
 
             await _produtoRepository.Registrar(produto);
 
-            if (!Commit())
+            if (!await Commit())
                 return;
 
             await _mediator.RaiseEvent(ProdutoAdapter.ToProdutoRegistradoEvent(produto));
@@ -59,7 +59,7 @@ namespace Catalogo.Domain.Produtos.Services
 
             await _produtoRepository.Atualizar(produto);
 
-            if (!Commit())
+            if (!await Commit())
                 return;
 
             await _mediator.RaiseEvent(ProdutoAdapter.ToProdutoAtualizadoEvent(produto));
@@ -74,7 +74,7 @@ namespace Catalogo.Domain.Produtos.Services
 
             await _produtoRepository.Atualizar(produto);
 
-            if (!Commit())
+            if (!await Commit())
                 return;
 
             await _mediator.RaiseEvent(ProdutoAdapter.ToProdutoAtivadoEvent(id));
@@ -89,7 +89,7 @@ namespace Catalogo.Domain.Produtos.Services
 
             await _produtoRepository.Atualizar(produto);
 
-            if (!Commit())
+            if (!await Commit())
                 return;
 
             await _mediator.RaiseEvent(ProdutoAdapter.ToProdutoInativadoEvent(id));

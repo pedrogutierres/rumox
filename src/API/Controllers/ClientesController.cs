@@ -90,7 +90,7 @@ namespace Rumox.API.Controllers
         [ProducesResponseType(typeof(ResponseError), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> RegistrarCliente([FromBody]RegistrarClienteViewModel model)
         {
-            var dataHoraCadastro = DateTime.Now;
+            var dataHoraCadastro = DateTime.UtcNow;
 
             var cliente = new Cliente(model.Id, new CPF(model.CPF), model.Nome, model.Sobrenome, model.Email, dataHoraCadastro, ClienteSenha.Factory.NovaSenha(model.Senha, dataHoraCadastro));
 

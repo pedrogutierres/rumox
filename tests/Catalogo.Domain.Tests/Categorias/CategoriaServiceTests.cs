@@ -35,7 +35,7 @@ namespace Catalogo.Domain.Tests.Categorias
             // Arrange
             var categoria = _categoriaTestsFixture.GerarCategoriaValida();
 
-            _categoriaTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(true);
+            _categoriaTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _categoriaTestsFixture.Mocker.GetMock<ICategoriaRepository>().Setup(p => p.Buscar(It.IsAny<Expression<Func<Categoria, bool>>>())).Returns(new List<Categoria>().AsQueryable());
 
             // Act
@@ -54,7 +54,7 @@ namespace Catalogo.Domain.Tests.Categorias
             var categoria = _categoriaTestsFixture.GerarCategoriaValida();
             var categoriaJaCadastrada = new List<Categoria> { categoria };
 
-            _categoriaTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(true);
+            _categoriaTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _categoriaTestsFixture.Mocker.GetMock<ICategoriaRepository>().Setup(p => p.Buscar(It.IsAny<Expression<Func<Categoria, bool>>>())).Returns(categoriaJaCadastrada.AsQueryable());
 
             // Act
@@ -72,7 +72,7 @@ namespace Catalogo.Domain.Tests.Categorias
             // Arrange
             var categoria = _categoriaTestsFixture.GerarCategoriaValida();
 
-            _categoriaTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(true);
+            _categoriaTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _categoriaTestsFixture.Mocker.GetMock<ICategoriaRepository>().Setup(p => p.Buscar(It.IsAny<Expression<Func<Categoria, bool>>>())).Returns(new List<Categoria>().AsQueryable());
 
             // Act
@@ -91,7 +91,7 @@ namespace Catalogo.Domain.Tests.Categorias
             var categoria = _categoriaTestsFixture.GerarCategoriaValida();
             var categoriaJaCadastrada = new List<Categoria> { categoria };
 
-            _categoriaTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(true);
+            _categoriaTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _categoriaTestsFixture.Mocker.GetMock<ICategoriaRepository>().Setup(p => p.Buscar(It.IsAny<Expression<Func<Categoria, bool>>>())).Returns(categoriaJaCadastrada.AsQueryable());
 
             // Act
@@ -109,7 +109,7 @@ namespace Catalogo.Domain.Tests.Categorias
             // Arrange
             var categoria = _categoriaTestsFixture.GerarCategoriaValida();
 
-            _categoriaTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(true);
+            _categoriaTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _categoriaTestsFixture.Mocker.GetMock<ICategoriaRepository>().Setup(p => p.ObterPorId(categoria.Id)).Returns(Task.FromResult(categoria));
             
             // Act
@@ -128,7 +128,7 @@ namespace Catalogo.Domain.Tests.Categorias
             var categoria = _categoriaTestsFixture.GerarCategoriaValida();
             var categoriaJaCadastrada = new List<Categoria> { categoria };
 
-            _categoriaTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(true);
+            _categoriaTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _categoriaTestsFixture.Mocker.GetMock<ICategoriaRepository>().Setup(p => p.ObterPorId(categoria.Id)).Returns(Task.FromResult(categoria));
             _categoriaTestsFixture.Mocker.GetMock<IProdutoRepository>().Setup(p => p.ExistePorCategoria(categoria.Id)).Returns(Task.FromResult(true));
 

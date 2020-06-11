@@ -34,7 +34,7 @@ namespace Catalogo.Domain.Tests.Produtos
             // Arrange
             var produto = _produtoTestsFixture.GerarProdutoValido();
 
-            _produtoTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(true);
+            _produtoTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _produtoTestsFixture.Mocker.GetMock<IProdutoRepository>().Setup(p => p.Buscar(It.IsAny<Expression<Func<Produto, bool>>>())).Returns(new List<Produto>().AsQueryable());
 
             // Act
@@ -53,7 +53,7 @@ namespace Catalogo.Domain.Tests.Produtos
             var produto = _produtoTestsFixture.GerarProdutoValido();
             var produtoJaCadastrado = new List<Produto> { produto };
 
-            _produtoTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(true);
+            _produtoTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _produtoTestsFixture.Mocker.GetMock<IProdutoRepository>().Setup(p => p.Buscar(It.IsAny<Expression<Func<Produto, bool>>>())).Returns(produtoJaCadastrado.AsQueryable());
 
             // Act
@@ -71,7 +71,7 @@ namespace Catalogo.Domain.Tests.Produtos
             // Arrange
             var produto = _produtoTestsFixture.GerarProdutoValido();
 
-            _produtoTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(true);
+            _produtoTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _produtoTestsFixture.Mocker.GetMock<IProdutoRepository>().Setup(p => p.ObterPorId(produto.Id)).Returns(Task.FromResult(produto));
 
             // Act
@@ -90,7 +90,7 @@ namespace Catalogo.Domain.Tests.Produtos
             var produto = _produtoTestsFixture.GerarProdutoValido();
             var produtoJaCadastrada = new List<Produto> { produto };
 
-            _produtoTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(true);
+            _produtoTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _produtoTestsFixture.Mocker.GetMock<IProdutoRepository>().Setup(p => p.ObterPorId(produto.Id)).Returns(Task.FromResult(_produtoTestsFixture.GerarProdutoValido()));
 
             // Act
@@ -108,7 +108,7 @@ namespace Catalogo.Domain.Tests.Produtos
             // Arrange
             var produto = _produtoTestsFixture.GerarProdutoInativo();
 
-            _produtoTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(true);
+            _produtoTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _produtoTestsFixture.Mocker.GetMock<IProdutoRepository>().Setup(p => p.ObterPorId(produto.Id)).Returns(Task.FromResult(produto));
 
             // Act
@@ -127,7 +127,7 @@ namespace Catalogo.Domain.Tests.Produtos
             // Arrange
             var produto = _produtoTestsFixture.GerarProdutoValido();
 
-            _produtoTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(true);
+            _produtoTestsFixture.Mocker.GetMock<IUnitOfWorkCatalogo>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _produtoTestsFixture.Mocker.GetMock<IProdutoRepository>().Setup(p => p.ObterPorId(produto.Id)).Returns(Task.FromResult(produto));
 
             // Act

@@ -50,11 +50,6 @@ namespace CRM.Infra.Data.Mongo.Repository
             return await Collection.CountDocumentsAsync(p => p.Id == id) > 0;
         }
 
-        public virtual int SaveChanges()
-        {
-            return 1;
-        }
-
         public void Dispose()
         {
             Context.Dispose();

@@ -34,7 +34,7 @@ namespace CRM.Domain.Tests.Clientes
             // Arrange
             var cliente = _clienteTestsFixture.GerarClienteValido();
 
-            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(true);
+            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _clienteTestsFixture.Mocker.GetMock<IClienteRepository>().Setup(p => p.Buscar(It.IsAny<Expression<Func<Cliente, bool>>>())).Returns(new List<Cliente>().AsQueryable());
 
             // Act
@@ -53,7 +53,7 @@ namespace CRM.Domain.Tests.Clientes
             var cliente = _clienteTestsFixture.GerarClienteValido();
             var clienteJaCadastrado = new List<Cliente> { cliente };
 
-            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(true);
+            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _clienteTestsFixture.Mocker.GetMock<IClienteRepository>().Setup(p => p.Buscar(It.IsAny<Expression<Func<Cliente, bool>>>())).Returns(clienteJaCadastrado.AsQueryable());
 
             // Act
@@ -71,7 +71,7 @@ namespace CRM.Domain.Tests.Clientes
             // Arrange
             var cliente = _clienteTestsFixture.GerarClienteValido();
 
-            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(true);
+            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _clienteTestsFixture.Mocker.GetMock<IClienteRepository>().Setup(p => p.ObterPorId(cliente.Id)).Returns(Task.FromResult(cliente));
             _clienteTestsFixture.Mocker.GetMock<IClienteRepository>().Setup(p => p.Buscar(It.IsAny<Expression<Func<Cliente, bool>>>())).Returns(new List<Cliente>().AsQueryable());
 
@@ -91,7 +91,7 @@ namespace CRM.Domain.Tests.Clientes
             var cliente = _clienteTestsFixture.GerarClienteValido();
             var clienteJaCadastrado = new List<Cliente> { cliente };
 
-            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(true);
+            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _clienteTestsFixture.Mocker.GetMock<IClienteRepository>().Setup(p => p.ObterPorId(cliente.Id)).Returns(Task.FromResult(_clienteTestsFixture.GerarClienteValido()));
             _clienteTestsFixture.Mocker.GetMock<IClienteRepository>().Setup(p => p.Buscar(It.IsAny<Expression<Func<Cliente, bool>>>())).Returns(clienteJaCadastrado.AsQueryable());
 
@@ -110,7 +110,7 @@ namespace CRM.Domain.Tests.Clientes
             // Arrange
             var cliente = _clienteTestsFixture.GerarClienteValido();
 
-            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(true);
+            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _clienteTestsFixture.Mocker.GetMock<IClienteRepository>().Setup(p => p.ObterPorId(cliente.Id)).Returns(Task.FromResult(cliente));
             _clienteTestsFixture.Mocker.GetMock<IClienteRepository>().Setup(p => p.Buscar(It.IsAny<Expression<Func<Cliente, bool>>>())).Returns(new List<Cliente>().AsQueryable());
 
@@ -130,7 +130,7 @@ namespace CRM.Domain.Tests.Clientes
             var cliente = _clienteTestsFixture.GerarClienteValido();
             var clienteJaCadastrado = new List<Cliente> { cliente };
 
-            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(true);
+            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _clienteTestsFixture.Mocker.GetMock<IClienteRepository>().Setup(p => p.ObterPorId(cliente.Id)).Returns(Task.FromResult(_clienteTestsFixture.GerarClienteValido()));
             _clienteTestsFixture.Mocker.GetMock<IClienteRepository>().Setup(p => p.Buscar(It.IsAny<Expression<Func<Cliente, bool>>>())).Returns(clienteJaCadastrado.AsQueryable());
 
@@ -151,7 +151,7 @@ namespace CRM.Domain.Tests.Clientes
             var senhaPreDefinica = "Rumox123";
             var cliente = _clienteTestsFixture.GerarClienteValidoComSenhaPreDefina(senhaPreDefinica);
 
-            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(true);
+            _clienteTestsFixture.Mocker.GetMock<IUnitOfWorkCRM>().Setup(p => p.Commit()).Returns(Task.FromResult(true));
             _clienteTestsFixture.Mocker.GetMock<IClienteRepository>().Setup(p => p.ObterPorId(cliente.Id)).Returns(Task.FromResult(cliente));
 
             // Act
