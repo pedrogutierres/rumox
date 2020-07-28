@@ -36,7 +36,7 @@ Ferramentas e bibliotecas utilizadas nos testes:
 
 - xUnit
 - Bogus
-- FluentAssetions
+- FluentAssertions
 - Moq
 - AutoMoq
 

@@ -6,7 +6,7 @@
 - Moq
 
 ## Como usar
-Para executar os testes de integração da API deve ser inicializado a infraestutura (como banco de dados e cache) pelo docker-compose de test.
+Para executar os testes de integração da API no Visual Studio, deve ser inicializado antes a infraestutura (como banco de dados e cache) pelo docker-compose de test.
 - *Opção 1*: executar diretamente o arquivo build-test.sh atraves de um terminal sh
 - *Opção 2*: executar o seguinte comando para levantar o docker-compose de teste, na pasta raiz da solução:
 ```
