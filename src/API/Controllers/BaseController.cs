@@ -80,7 +80,7 @@ namespace Rumox.API.Controllers
             int totalDeItens = itens.Count();
             int totalDePaginas = limit > 0 ? totalDeItens / limit : 1;
 
-            itens.Paginar(offset, limit);
+            itens = itens.Paginar(offset, limit);
 
             return PaginacaoViewModel<T>.NovaPaginacao(itens, totalDeItens, totalDePaginas);
         }
