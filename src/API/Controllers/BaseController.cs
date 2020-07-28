@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Rumox.API.Extensions;
 using Rumox.API.ResponseType;
 using Rumox.API.ViewModelsGlobal;
 using System;
@@ -74,9 +75,14 @@ namespace Rumox.API.Controllers
             };
         }
 
-        protected PaginacaoViewModel<T> Paginacao<T>(IEnumerable<T> itens, int totalItens)
+        protected PaginacaoViewModel<T> Paginar<T>(IQueryable<T> itens, int offset, int limit)
         {
-            return PaginacaoViewModel<T>.NovaPaginacao(itens, totalItens);
+            int totalDeItens = itens.Count();
+            int totalDePaginas = limit > 0 ? totalDeItens / limit : 1;
+
+            itens.Paginar(offset, limit);
+
+            return PaginacaoViewModel<T>.NovaPaginacao(itens, totalDeItens, totalDePaginas);
         }
 
         protected bool OperacaoValida()
