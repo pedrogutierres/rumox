@@ -2,6 +2,27 @@ version: '3.7'
 
 services:
 
+  webapp_api:
+    build:
+      context: .
+      dockerfile: src/API/Dockerfile
+    ports:
+      - 5000:80
+    networks:
+      - rumox-net
+    depends_on: 
+      - mysql
+      - mongo
+      - redis
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - JwtTokenOptions__MinutesValid=300000
+      - JwtTokenOptions__RefreshTokenMinutes=300000
+      - ConnectionStrings__MySQL=Server=mysql;DataBase=rumoxdb;Uid=root;Pwd=root
+      - ConnectionStrings__MongoDb=mongodb://mongo:27017/Rumox
+      - ConnectionStrings__Redis=redis:6379,DefaultDatabase=0
+      - HealthChecks-UI__HealthChecks__0__Uri=http://localhost/api/status
+
   mysql:
     ports:
       - 3306:3306

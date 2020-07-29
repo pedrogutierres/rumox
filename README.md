@@ -47,9 +47,17 @@ Ferramentas e bibliotecas utilizadas nos testes:
 
 ## Para executar
 
-Atualmente o docker está implementado apenas para levantar o ambiente de testes para a execução dos testes de integração, [segue como fazer](https://github.com/pedrogutierres/rumox/tree/master/tests/Rumox.API.Tests)
+Para executar a aplicação completa:
 
-~~Ainda não está implementado o deploy do aplicativo através do docker, em breve...~~
+```
+git clone https://github.com/pedrogutierres/rumox.git
+cd rumox
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+```
+
+ou execute o arquivo *build-dev.sh*
+
+Para levantar o ambiente de testes para a execução dos testes de integração, [segue como fazer](https://github.com/pedrogutierres/rumox/tree/master/tests/Rumox.API.Tests)
 
 ## Futuro
 
