@@ -4,7 +4,7 @@ using System;
 
 namespace Catalogo.Domain.Produtos
 {
-    public class Produto : Entity<Produto>
+    public sealed class Produto : Entity<Produto>
     {
         public Guid CategoriaId { get; private set; }
         public long Codigo { get; private set; }

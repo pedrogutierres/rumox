@@ -6,7 +6,7 @@ using System;
 
 namespace CRM.Domain.Clientes
 {
-    public class Cliente : Entity<Cliente>
+    public sealed class Cliente : Entity<Cliente>
     {
         public CPF CPF { get; private set; }
         public string Nome { get; private set; }

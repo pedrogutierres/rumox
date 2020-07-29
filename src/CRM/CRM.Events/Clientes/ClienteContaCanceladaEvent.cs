@@ -4,7 +4,7 @@ using System;
 
 namespace CRM.Events.Clientes
 {
-    public class ClienteContaCanceladaEvent : Event
+    public sealed class ClienteContaCanceladaEvent : Event
     {
         public Guid Id { get; private set; }
         public CPF CPF { get; private set; }

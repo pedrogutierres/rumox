@@ -3,7 +3,7 @@ using System;
 
 namespace CRM.Events.Clientes
 {
-    public class ClienteSenhaAlteradaEvent : Event
+    public sealed class ClienteSenhaAlteradaEvent : Event
     {
         public Guid Id { get; private set; }
 

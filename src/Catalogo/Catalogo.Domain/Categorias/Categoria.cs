@@ -4,7 +4,7 @@ using System;
 
 namespace Catalogo.Domain.Categorias
 {
-    public class Categoria : Entity<Categoria>
+    public sealed class Categoria : Entity<Categoria>
     {
         public string Nome { get; private set; }
         public DateTime DataHoraCriacao { get; private set; } = DateTime.Now;

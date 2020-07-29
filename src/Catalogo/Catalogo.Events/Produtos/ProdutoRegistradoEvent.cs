@@ -3,7 +3,7 @@ using System;
 
 namespace Catalogo.Events.Produtos
 {
-    public class ProdutoRegistradoEvent : Event
+    public sealed class ProdutoRegistradoEvent : Event
     {
         public Guid Id { get; private set; }
         public Guid CategoriaId { get; private set; }
