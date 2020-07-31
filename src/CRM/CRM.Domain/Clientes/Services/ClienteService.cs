@@ -5,7 +5,6 @@ using CRM.Domain.Clientes.Events;
 using CRM.Domain.Clientes.Interfaces;
 using CRM.Domain.Clientes.Validations;
 using CRM.Domain.Clientes.ValuesObjects;
-using CRM.Domain.Interfaces;
 using CRM.Events.Clientes;
 using MediatR;
 using System;
@@ -19,7 +18,7 @@ namespace CRM.Domain.Clientes.Services
 
         public ClienteService(
             IClienteRepository clienteRepository,
-            IUnitOfWorkCRM uow, 
+            IUnitOfWork uow, 
             IMediatorHandler mediator, 
             INotificationHandler<DomainNotification> notifications) 
             : base(uow, mediator, notifications)
@@ -41,9 +40,6 @@ namespace CRM.Domain.Clientes.Services
 
             await _clienteRepository.Registrar(cliente);
 
-            if (!await Commit())
-                return;
-
             await _mediator.RaiseEvent(ClienteAdapter.ToClienteRegistradoEvent(cliente));
         }
 
@@ -60,9 +56,6 @@ namespace CRM.Domain.Clientes.Services
             }
 
             await _clienteRepository.Atualizar(cliente);
-
-            if (!await Commit())
-                return;
 
             await _mediator.RaiseEvent(ClienteAdapter.ToClienteAtualizadoEvent(cliente));
         }
@@ -85,9 +78,6 @@ namespace CRM.Domain.Clientes.Services
             }
 
             await _clienteRepository.Atualizar(cliente);
-
-            if (!await Commit())
-                return;
 
             await _mediator.RaiseEvent(ClienteAdapter.ToClienteEmailAlteradoEvent(cliente));
         }
@@ -120,9 +110,6 @@ namespace CRM.Domain.Clientes.Services
 
             await _clienteRepository.Atualizar(cliente);
 
-            if (!await Commit())
-                return;
-
             await _mediator.RaiseEvent(new ClienteSenhaAlteradaEvent(cliente.Id));
         }
 
@@ -140,9 +127,6 @@ namespace CRM.Domain.Clientes.Services
             cliente.CancelarConta();
 
             await _clienteRepository.Atualizar(cliente);
-
-            if (!await Commit())
-                return;
 
             await _mediator.RaiseEvent(ClienteAdapter.ToClienteContaCanceladaEvent(cliente));
         }
