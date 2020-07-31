@@ -114,7 +114,7 @@ namespace Rumox.API.Controllers
                 return BadRequest();
             }
 
-            cliente.AlterarDados(model.Nome, model.Sobrenome);
+            cliente.AlterarDadosCadastrais(model.Nome, model.Sobrenome);
 
             await _clienteService.Atualizar(cliente);
 

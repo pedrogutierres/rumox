@@ -37,7 +37,7 @@ namespace CRM.Domain.Tests.Clientes
             var novoNome = "Novonome";
             var novoSobrenome = "Novosobrenome";
             var novoEmail = "novoemail@email.com";
-            cliente.AlterarDados(novoNome, novoSobrenome);
+            cliente.AlterarDadosCadastrais(novoNome, novoSobrenome);
             cliente.AlterarEmail(novoEmail);
 
             Assert.Equal(novoNome, cliente.Nome);

@@ -29,7 +29,7 @@ namespace Catalogo.Domain.Produtos
             CategoriaId = categoriaId;
         }
 
-        public void AlterarDados(string descricao, string informacoesAdicionais)
+        public void AlterarDescricaoEInformacoes(string descricao, string informacoesAdicionais)
         {
             Descricao = descricao;
             InformacoesAdicionais = informacoesAdicionais;

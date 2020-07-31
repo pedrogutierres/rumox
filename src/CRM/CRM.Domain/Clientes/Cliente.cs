@@ -29,7 +29,7 @@ namespace CRM.Domain.Clientes
             DataHoraCriacao = dataHoraCadastro;
         }
 
-        public void AlterarDados(string nome, string sobrenome)
+        public void AlterarDadosCadastrais(string nome, string sobrenome)
         {
             Nome = nome;
             Sobrenome = sobrenome;

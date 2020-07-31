@@ -96,7 +96,7 @@ namespace Rumox.API.Controllers
             if (produto.CategoriaId != model.CategoriaId)
                 produto.AlterarCategoria(model.CategoriaId);
 
-            produto.AlterarDados(model.Descricao, model.InformacoesAdicionais);
+            produto.AlterarDescricaoEInformacoes(model.Descricao, model.InformacoesAdicionais);
 
             await _produtoService.Atualizar(produto);
 

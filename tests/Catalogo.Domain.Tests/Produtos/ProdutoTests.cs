@@ -39,7 +39,7 @@ namespace Catalogo.Domain.Tests.Produtos
             var novaDescricao = "Nova Descrição";
             var novaInformacaoAdicional = "Nova Informação Adicional";
             produto.AlterarCategoria(novaCategoria);
-            produto.AlterarDados(novaDescricao, novaInformacaoAdicional);
+            produto.AlterarDescricaoEInformacoes(novaDescricao, novaInformacaoAdicional);
 
             Assert.Equal(novaCategoria, produto.CategoriaId);
             Assert.Equal(novaDescricao, produto.Descricao);
