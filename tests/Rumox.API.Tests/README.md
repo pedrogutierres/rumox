@@ -7,7 +7,7 @@
 
 ## Como usar
 Para executar os testes de integração da API no Visual Studio, deve ser inicializado antes a infraestutura (como banco de dados e cache) pelo docker-compose de test.
-- *Opção 1*: executar diretamente o arquivo build-test.sh atraves de um terminal sh
+- *Opção 1*: executar diretamente o arquivo up-infra-test.sh atraves de um terminal sh
 - *Opção 2*: executar o seguinte comando para levantar o docker-compose de teste, na pasta raiz da solução:
 ```
 docker-compose -f docker-compose.yml -f docker-compose.test.yml up -d
