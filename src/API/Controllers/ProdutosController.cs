@@ -73,9 +73,6 @@ namespace Rumox.API.Controllers
         {
             var produto = new Produto(model.Id, model.CategoriaId, model.Codigo, model.Descricao, model.InformacoesAdicionais);
 
-            if (model.Codigo == 0)
-                produto.GerarCodigo();
-
             await _produtoService.Registrar(produto);
 
             return Response(produto.Id);

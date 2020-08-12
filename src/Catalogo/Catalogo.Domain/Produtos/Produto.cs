@@ -22,34 +22,43 @@ namespace Catalogo.Domain.Produtos
             Codigo = codigo;
             Descricao = descricao;
             InformacoesAdicionais = informacoesAdicionais;
+
+            if (codigo == 0)
+                Codigo = GerarCodigo();
         }
 
         public void AlterarCategoria(Guid categoriaId)
         {
             CategoriaId = categoriaId;
+            NotificarAlteracao();
         }
 
         public void AlterarDescricaoEInformacoes(string descricao, string informacoesAdicionais)
         {
             Descricao = descricao;
             InformacoesAdicionais = informacoesAdicionais;
+            NotificarAlteracao();
         }
 
-        public bool GerarCodigo()
+        private int GerarCodigo()
         {
-            if (Codigo > 0) return false;
-
-            Codigo = new Random().Next(1, 999999999);
-            return true;
+            return new Random().Next(1, 999999999);
         }
 
         public void Ativar()
         {
             Ativo = true;
+            NotificarAlteracao();
         }
         public void Inativar()
         {
             Ativo = false;
+            NotificarAlteracao();
+        }
+
+        private void NotificarAlteracao()
+        {
+            DataHoraAlteracao = DateTime.UtcNow;
         }
 
         public override bool EhValido()

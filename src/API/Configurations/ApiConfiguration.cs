@@ -55,7 +55,7 @@ namespace Rumox.API.Configurations
 
         public static IApplicationBuilder UseApiConfig(this IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.ConfigureExceptionHandler(loggerFactory);
+            app.ConfigureExceptionHandler(env, loggerFactory);
 
             app.UseRouting();
 

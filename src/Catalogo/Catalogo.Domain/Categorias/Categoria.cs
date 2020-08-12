@@ -20,6 +20,7 @@ namespace Catalogo.Domain.Categorias
         public void AlteraNome(string nome)
         {
             Nome = nome;
+            DataHoraAlteracao = DateTime.UtcNow;
         }
 
         public override bool EhValido()

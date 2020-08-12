@@ -339,5 +339,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+healthchecksdb-wal
 /src/API/Properties/serviceDependencies.local.json
 /src/API/Properties/serviceDependencies.json

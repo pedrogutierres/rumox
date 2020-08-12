@@ -1,8 +1,10 @@
 ﻿using Core.Domain.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Rumox.API.Extensions;
 using Rumox.API.ResponseType;
 using System.Net;
 using System.Text.Json;
@@ -11,8 +13,11 @@ namespace Rumox.API.Middlewares
 {
     public static class ExceptionMiddlewareExtension
     {
-        public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public static void ConfigureExceptionHandler(this IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            if (env.IsTesting())
+                return;
+
             app.UseExceptionHandler(appError =>
             {
                 appError.Run(async context =>
