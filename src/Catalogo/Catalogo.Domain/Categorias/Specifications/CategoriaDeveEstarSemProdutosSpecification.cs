@@ -1,5 +1,6 @@
 ﻿using Catalogo.Domain.Produtos.Interface;
 using Core.Domain.Validations;
+using System.Threading.Tasks;
 
 namespace Catalogo.Domain.Categorias.Specifications
 {
@@ -15,9 +16,9 @@ namespace Catalogo.Domain.Categorias.Specifications
             _produtoRepository = produtoRepository;
         }
 
-        public override bool EhValido()
+        public override async Task<bool> EhValido()
         {
-            return !_produtoRepository.ExistePorCategoria(Entidade.Id).Result;
+            return !await _produtoRepository.ExistePorCategoria(Entidade.Id);
         }
     }
 }

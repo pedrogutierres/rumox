@@ -1,5 +1,6 @@
 ﻿using Core.Domain.Validations;
 using CRM.Domain.Clientes.Interfaces;
+using System.Threading.Tasks;
 
 namespace CRM.Domain.Clientes.Specifications
 {
@@ -12,9 +13,9 @@ namespace CRM.Domain.Clientes.Specifications
             _clienteRepository = clienteRepository;
         }
 
-        public override bool EhValido()
+        public override async Task<bool> EhValido()
         {
-            var clienteOriginal = _clienteRepository.ObterPorId(Entidade.Id).Result;
+            var clienteOriginal = await _clienteRepository.ObterPorId(Entidade.Id);
 
             return clienteOriginal?.CPF == Entidade.CPF;
         }

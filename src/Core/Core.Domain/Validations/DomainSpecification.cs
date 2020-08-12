@@ -1,4 +1,5 @@
 ﻿using Core.Domain.Models;
+using System.Threading.Tasks;
 
 namespace Core.Domain.Validations
 {
@@ -11,6 +12,6 @@ namespace Core.Domain.Validations
             Entidade = entidade;
         }
 
-        public abstract bool EhValido();
+        public abstract Task<bool> EhValido();
     }
 }

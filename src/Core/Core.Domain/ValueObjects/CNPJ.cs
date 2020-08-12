@@ -19,7 +19,7 @@ namespace Core.Domain.ValueObjects
             return Numero;
         }
 
-        public bool IsValid()
+        public bool EhValido()
         {
             return CNPJValidation.Validar(Numero);
         }

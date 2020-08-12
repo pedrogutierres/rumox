@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Core.Domain.ValueObjects
 {
-    public class Periodo
+    public sealed class Periodo
     {
         public DateTime DataInicial { get; private set; }
         public DateTime DataFinal { get; private set; }
@@ -17,18 +15,6 @@ namespace Core.Domain.ValueObjects
         public Periodo(DateTime dataInicial, DateTime dataFinal)
         {
             DataInicial = dataInicial;
-            DataFinal = dataFinal;
-        }
-
-        protected Periodo() { }
-
-        public void AlterarDataInicial(DateTime dataInicial)
-        {
-            DataInicial = dataInicial;
-        }
-
-        public void AlterarDataFinal(DateTime dataFinal)
-        {
             DataFinal = dataFinal;
         }
 

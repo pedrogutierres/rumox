@@ -1,6 +1,7 @@
 ﻿using Catalogo.Domain.Produtos.Interface;
 using Core.Domain.Validations;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Catalogo.Domain.Produtos.Specifications
 {
@@ -13,9 +14,9 @@ namespace Catalogo.Domain.Produtos.Specifications
             _produtoRepository = produtoRepository;
         }
 
-        public override bool EhValido()
+        public override async Task<bool> EhValido()
         {
-            return !_produtoRepository.Buscar(p => p.Id != Entidade.Id && p.Codigo == Entidade.Codigo).Any();
+            return await Task.FromResult(!_produtoRepository.Buscar(p => p.Id != Entidade.Id && p.Codigo == Entidade.Codigo).Any());
         }
     }
 }

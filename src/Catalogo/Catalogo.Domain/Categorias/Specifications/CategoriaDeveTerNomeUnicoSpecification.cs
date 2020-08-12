@@ -1,6 +1,7 @@
 ﻿using Catalogo.Domain.Categorias.Interfaces;
 using Core.Domain.Validations;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Catalogo.Domain.Categorias.Specifications
 {
@@ -16,9 +17,9 @@ namespace Catalogo.Domain.Categorias.Specifications
             _categoriaRepository = categoriaRepository;
         }
 
-        public override bool EhValido()
+        public override async Task<bool> EhValido()
         {
-            return !_categoriaRepository.Buscar(p => p.Id != Entidade.Id && p.Nome == Entidade.Nome).Any();
+            return await Task.FromResult(!_categoriaRepository.Buscar(p => p.Id != Entidade.Id && p.Nome == Entidade.Nome).Any());
         }
     }
 }

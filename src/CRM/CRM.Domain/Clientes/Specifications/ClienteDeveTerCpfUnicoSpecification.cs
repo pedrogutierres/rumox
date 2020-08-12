@@ -1,6 +1,7 @@
 ﻿using Core.Domain.Validations;
 using CRM.Domain.Clientes.Interfaces;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CRM.Domain.Clientes.Specifications
 {
@@ -13,9 +14,9 @@ namespace CRM.Domain.Clientes.Specifications
             _clienteRepository = clienteRepository;
         }
 
-        public override bool EhValido()
+        public override async Task<bool> EhValido()
         {
-            return !_clienteRepository.Buscar(p => p.Id != Entidade.Id && p.CPF.Numero == Entidade.CPF.Numero).Any();
+            return await Task.FromResult(!_clienteRepository.Buscar(p => p.Id != Entidade.Id && p.CPF.Numero == Entidade.CPF.Numero).Any());
         }
     }
 }
