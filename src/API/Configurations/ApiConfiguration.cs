@@ -1,15 +1,10 @@
-﻿using Core.Infra.Mongo;
-using Core.Infra.MySQL;
-using HealthChecks.UI.Client;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Rumox.API.Extensions;
 using Rumox.API.Middlewares;
 using Rumox.API.ResponseType;
 using System;
@@ -43,12 +38,7 @@ namespace Rumox.API.Configurations
 
             services.AddGzipCompression();
 
-            services.AddHealthChecks()
-                .AddMySql(configuration.GetMySQLDbConnectionString(), name: "MySQL")
-                .AddRedis(configuration.GetRedisConnectionString(), name: "Redis")
-                .AddMongoDb(configuration.GetMongoDbConnectionString(), name: "MongoDB");
-
-            services.AddHealthChecksUI();
+            services.AddHealthChecksConfiguration(configuration);
 
             return services;
         }
@@ -71,20 +61,7 @@ namespace Rumox.API.Configurations
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/api/status", new HealthCheckOptions()
-                {
-                    Predicate = _ => true,
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });
-                endpoints.MapHealthChecksUI(options =>
-                {
-                    options.UIPath = "/api/healthchecks-ui";
-                    options.ResourcesPath = "/api/healthchecks-ui-resources";
-
-                    options.UseRelativeApiPath = false;
-                    options.UseRelativeResourcesPath = false;
-                    options.UseRelativeWebhookPath = false;
-                });
+                endpoints.MapHealthChecksConfiguration();
             });
 
             return app;
