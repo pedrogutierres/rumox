@@ -59,12 +59,13 @@ ou execute o arquivo *build-dev.sh*
 
 Para levantar o ambiente de testes para a execução dos testes de integração, [segue como fazer](https://github.com/pedrogutierres/rumox/tree/master/tests/Rumox.API.Tests)
 
+ELK (Logs) ainda não habilitado por padrão, mas pode ser utilizado removendo o parâmetro "Logging:EnterpriseLog:Disabled" do appsettings.Development.json e utilizando a aplicação pelo Visual Studio junto com a infra pelo docker. *Será ajustado em breve*
+
 ## Futuro
 
 Segue alguns frameworks, bibliotecas, padrões, tecnologias e outros serviços, que possívelmente serão adotados:
 
 - CQRS
-- ELK (Logs)
 - RabbitMQ
 - Kafka
 - Dapper

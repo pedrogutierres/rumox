@@ -38,6 +38,8 @@ namespace Rumox.API.Configurations
 
             services.AddGzipCompression();
 
+            services.AddLoggingConfiguration(configuration);
+
             services.AddHealthChecksConfiguration(configuration);
 
             return services;
@@ -46,6 +48,8 @@ namespace Rumox.API.Configurations
         public static IApplicationBuilder UseApiConfig(this IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             app.ConfigureExceptionHandler(env, loggerFactory);
+
+            app.UseLoggingConfiguration(loggerFactory);
 
             app.UseRouting();
 

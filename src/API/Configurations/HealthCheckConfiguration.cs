@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RabbitMQ.Client;
 using Rumox.API.Extensions;
 
 namespace Rumox.API.Configurations
@@ -14,10 +15,13 @@ namespace Rumox.API.Configurations
     {
         public static void AddHealthChecksConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddHealthChecks()
+            var healthCheckBuilder = services.AddHealthChecks()
                .AddMySql(configuration.GetMySQLDbConnectionString(), name: "MySQL")
                .AddRedis(configuration.GetRedisConnectionString(), name: "Redis")
                .AddMongoDb(configuration.GetMongoDbConnectionString(), name: "MongoDB");
+
+            if (bool.TryParse(configuration["Logging:EnterpriseLog:Disabled"] ?? "false", out var disabled) && !disabled)
+                healthCheckBuilder.AddRabbitMQ(sp => sp.GetRequiredService<ConnectionFactory>(), name: "RabbitMQ Logs");
 
             services.AddHealthChecksUI();
         }
