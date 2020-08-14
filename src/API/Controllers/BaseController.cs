@@ -85,6 +85,16 @@ namespace Rumox.API.Controllers
             return PaginacaoViewModel<T>.NovaPaginacao(itens, totalDeItens, totalDePaginas);
         }
 
+        protected PaginacaoViewModel<TMapper> Paginar<T, TMapper>(IQueryable<T> itens, int offset, int limit, Func<IQueryable<T>, IEnumerable<TMapper>> mapper) where TMapper : class
+        {
+            int totalDeItens = itens.Count();
+            int totalDePaginas = limit > 0 ? totalDeItens / limit : 1;
+
+            itens = itens.Paginar(offset, limit);
+
+            return PaginacaoViewModel<TMapper>.NovaPaginacao(mapper(itens), totalDeItens, totalDePaginas);
+        }
+
         protected bool OperacaoValida()
         {
             return (!_notifications.HasNotifications());
