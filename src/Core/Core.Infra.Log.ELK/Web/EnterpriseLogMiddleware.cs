@@ -82,7 +82,12 @@ namespace Core.Infra.Log.ELK.Web
             if (context.Request.Headers != null)
             {
                 foreach (var header in context.Request.Headers)
+                {
+                    if (EnterpriseLogOptions.HeadersIgnore != null && EnterpriseLogOptions.HeadersIgnore.Contains(header.Key))
+                        continue;
+
                     AddOrUpdateTag(log, $"header.{header.Key}", header.Value.ToString());
+                }
             }
 
             if (context.Request.Query != null)

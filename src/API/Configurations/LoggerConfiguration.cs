@@ -18,6 +18,8 @@ namespace Rumox.API.Configurations
             if (bool.TryParse(configuration["Logging:EnterpriseLog:Disabled"] ?? "false", out var disabled) && disabled)
                 return;
 
+            EnterpriseLogOptions.HeadersIgnore = new string[] { "Authorization" };
+
             var logConfiguration = new EnterpriseLogOptions();
             configuration.Bind("Logging:EnterpriseLog", logConfiguration);
             services.AddSingleton(logConfiguration);

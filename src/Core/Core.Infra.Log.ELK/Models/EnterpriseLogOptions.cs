@@ -6,6 +6,11 @@
         public bool Disabled { get; set; }
 
         public EnterpriseLogRabbitMQConfig RabbitMQ { get; set; }
+
+        /// <summary>
+        /// Informar uma lista dos headers a ser ignorado pelo Middleware de log
+        /// </summary>
+        public static string[] HeadersIgnore;
     }
 
     public class EnterpriseLogRabbitMQConfig
