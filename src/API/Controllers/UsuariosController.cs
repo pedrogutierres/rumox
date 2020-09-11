@@ -53,7 +53,7 @@ namespace Rumox.API.Controllers
                 return BadRequest();
             }
 
-            if (!cliente.Senha.Equals(ClienteSenha.Factory.NovaSenha(model.Senha, cliente.DataHoraCriacao)))
+            if (!ClienteSenha.VerificarSenha(model.Senha, cliente.Senha))
             {
                 NotificarErro("Login", "Cliente não encontrado ou senha incorreta.");
                 return BadRequest();

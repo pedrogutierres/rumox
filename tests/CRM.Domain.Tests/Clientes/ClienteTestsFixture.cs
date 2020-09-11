@@ -29,7 +29,6 @@ namespace CRM.Domain.Tests.Clientes
 
         public Cliente GerarClienteValido()
         {
-            var dataHoraCadastro = DateTime.Now;
             var person = _faker.Person;
 
             return new Faker<Cliente>("pt_BR")
@@ -39,8 +38,8 @@ namespace CRM.Domain.Tests.Clientes
                       person.FirstName,
                       person.LastName,
                       person.Email,
-                      dataHoraCadastro,
-                      ClienteSenha.Factory.NovaSenha(f.Random.AlphaNumeric(10), dataHoraCadastro)))
+                      DateTime.UtcNow,
+                      ClienteSenha.Factory.NovaSenha(f.Random.AlphaNumeric(10))))
                   .Generate();
         }
 
@@ -54,13 +53,12 @@ namespace CRM.Domain.Tests.Clientes
                      f.Lorem.Sentence(wordCount: 101),
                      string.Empty,
                      DateTime.MinValue,
-                     ClienteSenha.Factory.NovaSenha("", DateTime.Now)))
+                     ClienteSenha.Factory.NovaSenha("")))
                  .Generate();
         }
 
         public Cliente GerarClienteInativo()
         {
-            var dataHoraCadastro = DateTime.Now;
             var person = _faker.Person;
 
             return new Faker<Cliente>("pt_BR")
@@ -70,15 +68,14 @@ namespace CRM.Domain.Tests.Clientes
                       person.FirstName,
                       person.LastName,
                       person.Email,
-                      dataHoraCadastro,
-                      ClienteSenha.Factory.NovaSenha(f.Random.AlphaNumeric(10), dataHoraCadastro)))
+                      DateTime.UtcNow,
+                      ClienteSenha.Factory.NovaSenha(f.Random.AlphaNumeric(10))))
                   .RuleFor(p => p.Ativo, p => false)
                   .Generate();
         }
 
         public Cliente GerarClienteValidoComSenhaPreDefina(string senha)
         {
-            var dataHoraCadastro = DateTime.Now;
             var person = _faker.Person;
 
             return new Faker<Cliente>("pt_BR")
@@ -88,8 +85,8 @@ namespace CRM.Domain.Tests.Clientes
                       person.FirstName,
                       person.LastName,
                       person.Email,
-                      dataHoraCadastro,
-                      ClienteSenha.Factory.NovaSenha(senha, dataHoraCadastro)))
+                      DateTime.UtcNow,
+                      ClienteSenha.Factory.NovaSenha(senha)))
                   .Generate();
         }
 

@@ -11,10 +11,9 @@ namespace CRM.Events.Clientes
         public string Nome { get; private set; }
         public string Sobrenome { get; private set; }
         public string Email { get; private set; }
-        public string Senha { get; private set; }
         public bool Ativo { get; private set; }
 
-        public ClienteContaCanceladaEvent(Guid id, CPF cpf, string nome, string sobrenome, string email, string senha, bool ativo)
+        public ClienteContaCanceladaEvent(Guid id, CPF cpf, string nome, string sobrenome, string email, bool ativo)
         {
             AggregateId = id;
             Id = id;
@@ -22,7 +21,6 @@ namespace CRM.Events.Clientes
             Nome = nome;
             Sobrenome = sobrenome;
             Email = email;
-            Senha = senha;
             Ativo = ativo;
         }
     }

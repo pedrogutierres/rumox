@@ -1,55 +1,53 @@
 ﻿using Core.Domain.Models;
+using Core.Identity;
 using System;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace CRM.Domain.Clientes.ValuesObjects
 {
-    public class ClienteSenha : ValueObject<ClienteSenha>
+    public class ClienteSenha : ValueObject<ClienteSenha>, IUserPassword
     {
-        public string Senha { get; private set; }
+        public byte[] Salt { get; private set; }
+        public byte[] Hash { get; private set; }
 
-        public ClienteSenha()
+        private ClienteSenha()
+        { }
+        public ClienteSenha(byte[] salt, byte[] hash)
         {
-        }
-
-        public ClienteSenha(string senha)
-        {
-            Senha = senha;
+            Salt = salt;
+            Hash = hash;
         }
 
         public bool EhValido()
         {
-            return !string.IsNullOrEmpty(Senha) && Senha.Length == 32 && !Senha.Contains(" ");
+            return Salt?.Length > 0 && Hash?.Length > 0;
         }
 
         public override bool Equals(object obj)
         {
-            return (Senha == (obj as ClienteSenha)?.Senha);
+            return (Hash == (obj as ClienteSenha)?.Hash);
         }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Salt, Hash);
+        }
+
+        public static bool VerificarSenha(string senha, byte[] salt, byte[] hash) => PasswordHelper.VerifyHash(senha, salt, hash);
+        public static bool VerificarSenha(string senha, ClienteSenha clienteSenha) => VerificarSenha(senha, clienteSenha.Salt, clienteSenha.Hash);
 
         public class Factory
         {
-            public static ClienteSenha NovaSenha(string senha, DateTime dataHoraCadastro)
+            public static ClienteSenha NovaSenha(string senha)
             {
-                if (string.IsNullOrEmpty(senha.Trim()))
-                    return new ClienteSenha("");
+                 if (string.IsNullOrEmpty(senha))
+                    return new ClienteSenha(null, null);
 
-                var senhaMD5 = CriptografarMD5($"{senha}-rumox-{dataHoraCadastro:ddMMyyyy}");
+                var salt = PasswordHelper.CreateSalt();
+                var hash = PasswordHelper.HashPassword(senha, salt);
 
-                return new ClienteSenha(senhaMD5);
-            }
-        }
-
-        private static string CriptografarMD5(string texto)
-        {
-            using (var md5Hash = MD5.Create())
-            {
-                var data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(texto));
-                var sBuilder = new StringBuilder();
-                foreach (var t in data)
-                    sBuilder.Append(t.ToString("x2"));
-                return sBuilder.ToString();
+                return new ClienteSenha(salt, hash);
             }
         }
     }

@@ -6,7 +6,7 @@ namespace CRM.Domain.Clientes.Events
     {
         public static ClienteRegistradoEvent ToClienteRegistradoEvent(Cliente cliente)
         {
-            return new ClienteRegistradoEvent(cliente.Id, cliente.CPF, cliente.Nome, cliente.Sobrenome, cliente.Email, cliente.Senha.Senha, cliente.Ativo);
+            return new ClienteRegistradoEvent(cliente.Id, cliente.CPF, cliente.Nome, cliente.Sobrenome, cliente.Email, cliente.Ativo);
         }
 
         public static ClienteAtualizadoEvent ToClienteAtualizadoEvent(Cliente cliente)
@@ -21,7 +21,7 @@ namespace CRM.Domain.Clientes.Events
 
         public static ClienteContaCanceladaEvent ToClienteContaCanceladaEvent(Cliente cliente)
         {
-            return new ClienteContaCanceladaEvent(cliente.Id, cliente.CPF, cliente.Nome, cliente.Sobrenome, cliente.Email, cliente.Senha.Senha, cliente.Ativo);
+            return new ClienteContaCanceladaEvent(cliente.Id, cliente.CPF, cliente.Nome, cliente.Sobrenome, cliente.Email, cliente.Ativo);
         }
     }
 }

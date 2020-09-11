@@ -18,9 +18,9 @@ namespace CRM.Domain.Clientes.Services
 
         public ClienteService(
             IClienteRepository clienteRepository,
-            IUnitOfWork uow, 
-            IMediatorHandler mediator, 
-            INotificationHandler<DomainNotification> notifications) 
+            IUnitOfWork uow,
+            IMediatorHandler mediator,
+            INotificationHandler<DomainNotification> notifications)
             : base(uow, mediator, notifications)
         {
             _clienteRepository = clienteRepository;
@@ -89,14 +89,14 @@ namespace CRM.Domain.Clientes.Services
 
             if (!ignorarSenhaAtual)
             {
-                if (!cliente.Senha.Equals(ClienteSenha.Factory.NovaSenha(senhaAtual, cliente.DataHoraCriacao)))
+                if (!ClienteSenha.VerificarSenha(senhaAtual, cliente.Senha))
                 {
                     NotificarErro("AlterarSenha", "A senha atual do cliente está incorreta.");
                     return;
                 }
             }
 
-            cliente.AlterarSenha(ClienteSenha.Factory.NovaSenha(novaSenha, cliente.DataHoraCriacao));
+            cliente.AlterarSenha(ClienteSenha.Factory.NovaSenha(novaSenha));
 
             if (!ClienteValido(cliente))
                 return;
@@ -118,7 +118,7 @@ namespace CRM.Domain.Clientes.Services
             var cliente = await ObterCliente(id, "CancelarConta");
             if (cliente == null) return;
 
-            if (!cliente.Senha.Equals(ClienteSenha.Factory.NovaSenha(senha, cliente.DataHoraCriacao)))
+            if (!ClienteSenha.VerificarSenha(senha, cliente.Senha))
             {
                 NotificarErro("CancelarConta", "A senha do cliente está incorreta.");
                 return;
