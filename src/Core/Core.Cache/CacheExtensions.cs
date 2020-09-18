@@ -28,6 +28,7 @@ namespace Core.Cache
                 return JsonConvert.DeserializeObject<TItem>(result, JsonSettingsPrivateSetters);
 
             var obj = factory();
+            if (obj == null) return default;
 
             if (circuitBreaker.CircuitState != CircuitState.Closed)
                 return obj;
@@ -67,6 +68,7 @@ namespace Core.Cache
                 return JsonConvert.DeserializeObject<TItem>(result, JsonSettingsPrivateSetters);
 
             var obj = await factory();
+            if (obj == null) return default;
 
             if (circuitBreaker.CircuitState != CircuitState.Closed)
                 return obj;
