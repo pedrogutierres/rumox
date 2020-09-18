@@ -22,7 +22,7 @@ namespace Core.Infra.Mongo
                 cb.Subscribe<CommandStartedEvent>(e =>
                 {
                     // Caso queira identar, decomenctar e colocar dentro do ToJson
-                    var set = new MongoDB.Bson.IO.JsonWriterSettings() { Indent = true };
+                    //var set = new MongoDB.Bson.IO.JsonWriterSettings() { Indent = true };
                     logger.LogInformation($"{e.CommandName} - {e.Command.ToJson()}");
                 });
             };
