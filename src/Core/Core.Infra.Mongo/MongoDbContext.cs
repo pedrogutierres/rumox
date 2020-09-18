@@ -1,7 +1,9 @@
 ﻿using Core.Infra.Mongo.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Core.Events;
 using System;
 
 namespace Core.Infra.Mongo
@@ -12,33 +14,20 @@ namespace Core.Infra.Mongo
 
         public MongoDbContext(IConfiguration configuration, ILogger<MongoDbContext> logger)
         {
-            // Teste para logar as querys executadas no mongo (ainda será refatorado e testado melhor)
-            /*var mongoUrl = new MongoUrl(configuration.GetMongoDbConnectionString());
-            var settings = new MongoClientSettings()
-            {
-                Server = mongoUrl.Server,
-                ClusterConfigurator = cb =>
-                {
-                    if (Convert.ToBoolean(configuration.GetSection("Logging")?["LogarDatabase"] ?? "false"))
-                    {
-                        cb.Subscribe<CommandStartedEvent>(e =>
-                        {
-                            var set = new MongoDB.Bson.IO.JsonWriterSettings()
-                            {
-                                Indent = true
-                            };
-
-                            logger.LogInformation($"{e.CommandName} - {e.Command.ToJson(set)}");
-                        });
-                    }
-                }
-            };
-            IMongoClient client = new MongoClient(settings);*/
-
             var mongoUrl = new MongoUrl(configuration.GetMongoDbConnectionString());
             var dataBasename = mongoUrl.DatabaseName;
+            var mongoClientSettings = MongoClientSettings.FromUrl(mongoUrl);
+            mongoClientSettings.ClusterConfigurator = cb =>
+            {
+                cb.Subscribe<CommandStartedEvent>(e =>
+                {
+                    // Caso queira identar, decomenctar e colocar dentro do ToJson
+                    var set = new MongoDB.Bson.IO.JsonWriterSettings() { Indent = true };
+                    logger.LogInformation($"{e.CommandName} - {e.Command.ToJson()}");
+                });
+            };
 
-            IMongoClient client = new MongoClient(mongoUrl);
+            IMongoClient client = new MongoClient(mongoClientSettings);
             Db = client.GetDatabase(dataBasename);
 
             client.RegisterDefaultConventions();
