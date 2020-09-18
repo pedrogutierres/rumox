@@ -3,6 +3,7 @@ using CRM.Domain.Clientes.Interfaces;
 using CRM.Infra.Data.Mongo.Context;
 using CRM.Infra.Data.Mongo.Repository;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using System.Threading.Tasks;
 
 namespace CRM.Infra.Data.Mongo.Repositories
@@ -12,14 +13,14 @@ namespace CRM.Infra.Data.Mongo.Repositories
         public ClienteRepository(CRMContext context) : base(context)
         {  }
 
-        public async Task<Cliente> ObterPorCPF(string cpf)
+        public Task<Cliente> ObterPorCPF(string cpf)
         {
-            return (await Collection.FindAsync(p => p.CPF.Numero == cpf)).FirstOrDefault();
+            return Collection.Find(p => p.CPF.Numero == cpf).FirstOrDefaultAsync();
         }
 
-        public async Task<Cliente> ObterPorEmail(string email)
+        public Task<Cliente> ObterPorEmail(string email)
         {
-            return (await Collection.FindAsync(p => p.Email == email)).FirstOrDefault();
+            return Collection.Find(p => p.Email == email).FirstOrDefaultAsync();
         }
     }
 }

@@ -21,8 +21,7 @@ namespace Core.Infra.MySQL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (Convert.ToBoolean(_configuration.GetSection("Logging")?["LogarDatabase"] ?? "false"))
-                optionsBuilder.UseLoggerFactory(_loggerFactory);
+            optionsBuilder.UseLoggerFactory(_loggerFactory);
 
             optionsBuilder.UseMySql(_configuration.GetMySQLDbConnectionString());
         }
