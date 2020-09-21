@@ -46,9 +46,9 @@ namespace CRM.Infra.Data.Mongo.Repository
             return Collection.Find(p => p.Id == id).FirstOrDefaultAsync();
         }
 
-        public virtual async Task<bool> ExistePorId(Guid id)
+        public virtual Task<bool> ExistePorId(Guid id)
         {
-            return await Collection.CountDocumentsAsync(p => p.Id == id) > 0;
+            return Collection.Find(p => p.Id == id).Limit(1).AnyAsync();
         }
 
         public void Dispose()
