@@ -4,11 +4,10 @@ using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Events;
-using System;
 
 namespace Core.Infra.Mongo
 {
-    public abstract class MongoDbContext : IDisposable
+    public abstract class MongoDbContext
     {
         public IMongoDatabase Db { get; protected set; }
 
@@ -31,11 +30,6 @@ namespace Core.Infra.Mongo
             Db = client.GetDatabase(dataBasename);
 
             client.RegisterDefaultConventions();
-        }
-
-        public virtual void Dispose()
-        {
-            Db = null;
         }
     }
 }

@@ -53,7 +53,7 @@ namespace CRM.Infra.Data.Mongo.Repository
 
         public void Dispose()
         {
-            Context.Dispose();
+            
         }
     }
 }

@@ -30,7 +30,7 @@ namespace CRM.Infra.CrossCutting.DI
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IUnitOfWork>(service => service.GetRequiredService<UnitOfWorkDefault>());
 
-            services.AddScoped<CRMContext>();
+            services.AddSingleton<CRMContext>();
         }
     }
 }
